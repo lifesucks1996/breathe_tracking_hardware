@@ -2,6 +2,7 @@
 //
 // Rocio
 // 11/11/2025
+// Modificado 26/11/25
 //
 // --------------------------------------------------------------
 
@@ -50,6 +51,7 @@ void inicializarPlaquita () {
 
   pinMode(O3_PIN_VGAS, INPUT); // A5 default
   pinMode(O3_PIN_VREF, INPUT); // A4 default
+  pinMode(PIN_A6, INPUT); // Batería
 
 } // ()
 
@@ -57,8 +59,6 @@ void inicializarPlaquita () {
 // setup()
 // --------------------------------------------------------------
 void setup() {
-
-  Globales::elPuerto.esperarDisponible();
 
   //----------------------------------------------------------------- 
 
@@ -199,7 +199,7 @@ void loop () {
   //-------------------------------------------
     elPublicador.laEmisora.emitirDatosMultiples(datos_payload, sizeof(datos_payload));
   
-    esperar( 120000 );
+    esperar( 30000 );
 
     elPublicador.laEmisora.detenerAnuncio();
   //-------------------------------------------
