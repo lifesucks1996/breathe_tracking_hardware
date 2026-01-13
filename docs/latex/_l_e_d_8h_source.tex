@@ -1,0 +1,94 @@
+\doxysection{LED.\+h}
+\hypertarget{_l_e_d_8h_source}{}\label{_l_e_d_8h_source}\index{src/HolaMundoIBeacon/LED.h@{src/HolaMundoIBeacon/LED.h}}
+\mbox{\hyperlink{_l_e_d_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00001}00001\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ LED.h}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ Clase\ para\ el\ control\ de\ un\ LED\ y\ funciones\ auxiliares\ de\ tiempo.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ Rocio}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ 11/11/2025}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00006}00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ LED\_H\_INCLUIDO}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ LED\_H\_INCLUIDO}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00010}00010\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00011}00011\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00012}00012\ \textcolor{comment}{\ *\ @brief\ Pausa\ la\ ejecución\ del\ programa\ durante\ un\ tiempo\ determinado.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00013}00013\ \textcolor{comment}{\ *\ @param\ tiempo\ Cantidad\ de\ milisegundos\ a\ esperar.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00014}00014\ \textcolor{comment}{\ *\ @details\ Es\ un\ envoltorio\ (wrapper)\ de\ la\ función\ estándar\ delay().}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00015}00015\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00016}\mbox{\hyperlink{_l_e_d_8h_a2fb17dd710d89b92e59a349551733fa0}{00016}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_l_e_d_8h_a2fb17dd710d89b92e59a349551733fa0}{esperar}}\ (\textcolor{keywordtype}{long}\ tiempo)\ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00017}00017\ \ \ delay\ (tiempo);}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00018}00018\ \}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00019}00019\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00020}00020\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00021}00021\ \textcolor{comment}{\ *\ @class\ LED}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00022}00022\ \textcolor{comment}{\ *\ @brief\ Clase\ para\ gestionar\ un\ diodo\ LED\ conectado\ a\ un\ pin\ GPIO.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00023}00023\ \textcolor{comment}{\ *\ @details\ Permite\ realizar\ operaciones\ básicas\ como\ encender,\ apagar,}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00024}00024\ \textcolor{comment}{\ *\ alternar\ el\ estado\ o\ realizar\ un\ parpadeo\ (brillar).}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00025}00025\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00026}\mbox{\hyperlink{class_l_e_d}{00026}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_l_e_d_a027bcd6d546b47fd3ef22685ed1f73e2}{LED}}\ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00027}00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00028}\mbox{\hyperlink{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b}{00028}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b}{numeroLED}};\ \ \ \ \textcolor{comment}{///<\ Número\ del\ pin\ GPIO\ al\ que\ está\ conectado\ el\ LED.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00029}\mbox{\hyperlink{class_l_e_d_a24c773334fcf58613f20246a0f22640e}{00029}}\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_l_e_d_a24c773334fcf58613f20246a0f22640e}{encendido}};\ \ \ \textcolor{comment}{///<\ Estado\ interno\ del\ LED\ (true\ =\ encendido,\ false\ =\ apagado).}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00031}00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00032}00032\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00033}00033\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00034}00034\ \textcolor{comment}{\ \ \ *\ @brief\ Constructor\ de\ la\ clase\ LED.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00035}00035\ \textcolor{comment}{\ \ \ *\ @param\ numero\ Número\ del\ pin\ donde\ se\ conecta\ el\ LED.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00036}00036\ \textcolor{comment}{\ \ \ *\ @details\ Configura\ el\ pin\ como\ salida\ (OUTPUT)\ y\ asegura\ que\ el\ LED\ }}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00037}00037\ \textcolor{comment}{\ \ \ *\ comience\ en\ estado\ apagado.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00038}00038\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00039}\mbox{\hyperlink{class_l_e_d_a027bcd6d546b47fd3ef22685ed1f73e2}{00039}}\ \ \ \mbox{\hyperlink{class_l_e_d_a027bcd6d546b47fd3ef22685ed1f73e2}{LED}}\ (\textcolor{keywordtype}{int}\ numero)}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00040}00040\ \ \ :\ \mbox{\hyperlink{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b}{numeroLED}}\ (numero),\ \mbox{\hyperlink{class_l_e_d_a24c773334fcf58613f20246a0f22640e}{encendido}}(false)}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00041}00041\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00042}00042\ \ \ \ \ pinMode(\mbox{\hyperlink{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b}{numeroLED}},\ OUTPUT);}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{class_l_e_d_a7f961959fa7405fec54de6121415db80}{apagar}}\ ();}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00044}00044\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00045}00045\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00046}00046\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00047}00047\ \textcolor{comment}{\ \ \ *\ @brief\ Enciende\ el\ LED.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00048}00048\ \textcolor{comment}{\ \ \ *\ @details\ Pone\ el\ pin\ en\ nivel\ alto\ (HIGH)\ y\ actualiza\ el\ estado\ interno.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00049}00049\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00050}\mbox{\hyperlink{class_l_e_d_a58660bafc0f4d6016392feabac555812}{00050}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a58660bafc0f4d6016392feabac555812}{encender}}\ ()\ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00051}00051\ \ \ \ \ digitalWrite(\mbox{\hyperlink{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b}{numeroLED}},\ HIGH);\ }
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{class_l_e_d_a24c773334fcf58613f20246a0f22640e}{encendido}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00053}00053\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00054}00054\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00055}00055\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00056}00056\ \textcolor{comment}{\ \ \ *\ @brief\ Apaga\ el\ LED.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ *\ @details\ Pone\ el\ pin\ en\ nivel\ bajo\ (LOW)\ y\ actualiza\ el\ estado\ interno.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00058}00058\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00059}\mbox{\hyperlink{class_l_e_d_a7f961959fa7405fec54de6121415db80}{00059}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a7f961959fa7405fec54de6121415db80}{apagar}}\ ()\ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00060}00060\ \ \ \ \ digitalWrite(\mbox{\hyperlink{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b}{numeroLED}},\ LOW);}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00061}00061\ \ \ \ \ \mbox{\hyperlink{class_l_e_d_a24c773334fcf58613f20246a0f22640e}{encendido}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00062}00062\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00063}00063\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00064}00064\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00065}00065\ \textcolor{comment}{\ \ \ *\ @brief\ Cambia\ el\ estado\ actual\ del\ LED.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00066}00066\ \textcolor{comment}{\ \ \ *\ @details\ Si\ el\ LED\ está\ encendido\ lo\ apaga,\ y\ viceversa.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00067}00067\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00068}\mbox{\hyperlink{class_l_e_d_a9b1361dbee5de756d142b1a2c3e685da}{00068}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a9b1361dbee5de756d142b1a2c3e685da}{alternar}}\ ()\ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_l_e_d_a24c773334fcf58613f20246a0f22640e}{encendido}})\ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00070}00070\ \ \ \ \ \ \ \mbox{\hyperlink{class_l_e_d_a7f961959fa7405fec54de6121415db80}{apagar}}();}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00071}00071\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00072}00072\ \ \ \ \ \ \ \mbox{\hyperlink{class_l_e_d_a58660bafc0f4d6016392feabac555812}{encender}}\ ();}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00074}00074\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00075}00075\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00076}00076\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ *\ @brief\ Enciende\ el\ LED\ durante\ un\ tiempo\ y\ luego\ lo\ apaga.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ *\ @param\ tiempo\ Duración\ del\ encendido\ en\ milisegundos.}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ *\ @details\ Esta\ función\ es\ bloqueante,\ ya\ que\ utiliza\ la\ función\ esperar().}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00080}00080\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00081}\mbox{\hyperlink{class_l_e_d_a7431e9efb39a2890f75b4e235b8f617e}{00081}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_l_e_d_a7431e9efb39a2890f75b4e235b8f617e}{brillar}}\ (\textcolor{keywordtype}{long}\ tiempo)\ \{}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{class_l_e_d_a58660bafc0f4d6016392feabac555812}{encender}}\ ();}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00083}00083\ \ \ \ \ \mbox{\hyperlink{_l_e_d_8h_a2fb17dd710d89b92e59a349551733fa0}{esperar}}(tiempo);\ }
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00084}00084\ \ \ \ \ \mbox{\hyperlink{class_l_e_d_a7f961959fa7405fec54de6121415db80}{apagar}}\ ();}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00085}00085\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00086}00086\ \};\ \textcolor{comment}{//\ class}}
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_l_e_d_8h_source_l00088}00088\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

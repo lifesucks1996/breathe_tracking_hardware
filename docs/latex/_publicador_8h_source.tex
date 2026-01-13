@@ -1,0 +1,127 @@
+\doxysection{Publicador.\+h}
+\hypertarget{_publicador_8h_source}{}\label{_publicador_8h_source}\index{src/HolaMundoIBeacon/Publicador.h@{src/HolaMundoIBeacon/Publicador.h}}
+\mbox{\hyperlink{_publicador_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00001}00001\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ Publicador.h}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ Clase\ para\ la\ publicación\ de\ mediciones\ ambientales\ mediante\ beacons\ BLE.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ Rocio}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ 11/11/2025}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00006}00006\ \textcolor{comment}{\ *\ @details\ Esta\ clase\ actúa\ como\ un\ nivel\ de\ abstracción\ sobre\ EmisoraBLE,\ }}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00007}00007\ \textcolor{comment}{\ *\ facilitando\ el\ envío\ de\ datos\ específicos\ (CO2,\ Temperatura)\ formateados\ }}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00008}00008\ \textcolor{comment}{\ *\ como\ anuncios\ iBeacon.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00009}00009\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00011}00011\ \textcolor{preprocessor}{\#ifndef\ PUBLICADOR\_H\_INCLUIDO}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00012}00012\ \textcolor{preprocessor}{\#define\ PUBLICADOR\_H\_INCLUIDO}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00013}00013\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00014}00014\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00015}00015\ \textcolor{comment}{\ *\ @class\ Publicador}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00016}00016\ \textcolor{comment}{\ *\ @brief\ Gestiona\ la\ lógica\ de\ empaquetado\ y\ emisión\ de\ datos\ de\ sensores.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00017}00017\ \textcolor{comment}{\ *\ *\ Organiza\ las\ lecturas\ en\ el\ formato\ estándar\ de\ iBeacon,\ utilizando\ el}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00018}00018\ \textcolor{comment}{\ *\ campo\ 'Major'\ para\ el\ ID\ de\ la\ medida\ y\ un\ contador,\ y\ el\ campo\ 'Minor'\ }}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00019}00019\ \textcolor{comment}{\ *\ para\ el\ valor\ de\ la\ medición.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00020}00020\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00021}\mbox{\hyperlink{class_publicador}{00021}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_publicador_aa6e6635cf76f5be0d84b8e7780156151}{Publicador}}\ \{}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00023}00023\ \textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00024}00024\ \textcolor{comment}{\ \ /**\ *\ @brief\ UUID\ del\ beacon\ (16\ bytes).\ }}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00025}00025\ \textcolor{comment}{\ \ \ *\ Representa\ la\ identidad\ de\ la\ red\ de\ sensores\ (EPSG-\/GTI-\/PROY-\/3A).}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00026}00026\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00027}\mbox{\hyperlink{class_publicador_afdd05d23d289af8d520938cbec79b93d}{00027}}\ \ \ uint8\_t\ \mbox{\hyperlink{class_publicador_afdd05d23d289af8d520938cbec79b93d}{beaconUUID}}[16]\ =\ \{\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00028}00028\ \ \ \ \ \textcolor{charliteral}{'E'},\ \textcolor{charliteral}{'P'},\ \textcolor{charliteral}{'S'},\ \textcolor{charliteral}{'G'},\ \textcolor{charliteral}{'-\/'},\ \textcolor{charliteral}{'G'},\ \textcolor{charliteral}{'T'},\ \textcolor{charliteral}{'I'},\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00029}00029\ \ \ \ \ \textcolor{charliteral}{'-\/'},\ \textcolor{charliteral}{'P'},\ \textcolor{charliteral}{'R'},\ \textcolor{charliteral}{'O'},\ \textcolor{charliteral}{'Y'},\ \textcolor{charliteral}{'-\/'},\ \textcolor{charliteral}{'3'},\ \textcolor{charliteral}{'A'}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00030}00030\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00032}00032\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00033}00033\ \textcolor{comment}{\ \ /**\ *\ @brief\ Instancia\ de\ la\ emisora\ BLE\ configurada\ para\ este\ publicador.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00034}00034\ \textcolor{comment}{\ \ \ *\ *\ Nombre:\ "{}rocio"{}}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00035}00035\ \textcolor{comment}{\ \ \ *\ *\ Fabricante:\ Apple\ (0x004c)}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00036}00036\ \textcolor{comment}{\ \ \ *\ *\ Potencia:\ 4\ dBm}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00037}00037\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00038}\mbox{\hyperlink{class_publicador_a86ef036c1b64668ac54dfe87b595aec5}{00038}}\ \ \ \mbox{\hyperlink{class_emisora_b_l_e}{EmisoraBLE}}\ \mbox{\hyperlink{class_publicador_a86ef036c1b64668ac54dfe87b595aec5}{laEmisora}}\ \{}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00039}00039\ \ \ \ \ \textcolor{stringliteral}{"{}rocio"{}},\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00040}00040\ \ \ \ \ 0x004c,\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00041}00041\ \ \ \ \ 4\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00042}00042\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00043}00043\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00044}00044\ \textcolor{comment}{\ \ /**\ @brief\ Valor\ de\ RSSI\ de\ referencia\ para\ el\ iBeacon.\ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00045}\mbox{\hyperlink{class_publicador_a339fb2ba061a53478572ade00866408c}{00045}}\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_publicador_a339fb2ba061a53478572ade00866408c}{RSSI}}\ =\ -\/53;\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00047}00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00048}00048\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00049}00049\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00050}00050\ \textcolor{comment}{\ \ \ *\ @enum\ MedicionesID}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00051}00051\ \textcolor{comment}{\ \ \ *\ @brief\ Identificadores\ numéricos\ para\ los\ distintos\ tipos\ de\ sensores.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00052}00052\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00053}\mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38}{00053}}\ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38}{MedicionesID}}\ \ \{}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00054}\mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38a32fd7e9cb7b0274a336e9dc35614f638}{00054}}\ \ \ \ \ \mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38a32fd7e9cb7b0274a336e9dc35614f638}{CO2}}\ =\ 11,\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{///<\ ID\ para\ sensores\ de\ Dióxido\ de\ Carbono.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00055}\mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38aba4e4bf52d95cc981259e2a2192e6047}{00055}}\ \ \ \ \ \mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38aba4e4bf52d95cc981259e2a2192e6047}{TEMPERATURA}}\ =\ 12,\ \ \ \textcolor{comment}{///<\ ID\ para\ sensores\ de\ Temperatura.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00056}\mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38ad30d25e445bf4115dfd39ddcdb665ca4}{00056}}\ \ \ \ \ \mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38ad30d25e445bf4115dfd39ddcdb665ca4}{RUIDO}}\ =\ 13\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{///<\ ID\ para\ sensores\ de\ Ruido\ ambiental.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00057}00057\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00058}00058\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00059}00059\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ *\ @brief\ Constructor\ de\ la\ clase\ Publicador.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ *\ @note\ La\ emisora\ no\ se\ enciende\ aquí\ para\ evitar\ problemas\ de\ inicialización\ de\ hardware.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00062}00062\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00063}\mbox{\hyperlink{class_publicador_aa6e6635cf76f5be0d84b8e7780156151}{00063}}\ \ \ \mbox{\hyperlink{class_publicador_aa6e6635cf76f5be0d84b8e7780156151}{Publicador}}(\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00064}00064\ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00065}00065\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00066}00066\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00067}00067\ \textcolor{comment}{\ \ \ *\ @brief\ Activa\ el\ hardware\ de\ la\ emisora\ BLE.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00068}00068\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00069}\mbox{\hyperlink{class_publicador_a10f309e5dfd232d204c5d2952581fe16}{00069}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_publicador_a10f309e5dfd232d204c5d2952581fe16}{encenderEmisora}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00070}00070\ \ \ \ \ (*this).laEmisora.encenderEmisora();}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00071}00071\ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00072}00072\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00073}00073\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ *\ @brief\ Publica\ una\ medición\ de\ CO2.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00075}00075\ \textcolor{comment}{\ \ \ *\ @param\ valorCO2\ Valor\ de\ la\ medición\ a\ enviar\ (se\ coloca\ en\ el\ campo\ Minor).}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00076}00076\ \textcolor{comment}{\ \ \ *\ @param\ contador\ Valor\ incremental\ para\ diferenciar\ anuncios.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ *\ @param\ tiempoEspera\ Milisegundos\ que\ estará\ activo\ el\ anuncio\ antes\ de\ detenerse.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ *\ @details\ El\ campo\ 'Major'\ se\ forma\ combinando\ el\ ID\ del\ CO2\ (8\ bits\ altos)\ y\ el\ contador\ (8\ bits\ bajos).}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00080}\mbox{\hyperlink{class_publicador_a2ed2009b9cec631024263659be882985}{00080}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_publicador_a2ed2009b9cec631024263659be882985}{publicarCO2}}(\ int16\_t\ valorCO2,\ uint8\_t\ contador,}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ tiempoEspera\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00083}00083\ \ \ \ \ \textcolor{comment}{//\ 1.\ Calculamos\ el\ campo\ Major\ (ID\ +\ Contador)}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00084}00084\ \ \ \ \ uint16\_t\ major\ =\ (\mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38a32fd7e9cb7b0274a336e9dc35614f638}{MedicionesID::CO2}}\ <<\ 8)\ +\ contador;}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00085}00085\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00086}00086\ \ \ \ \ \textcolor{comment}{//\ 2.\ Emitimos\ el\ anuncio\ iBeacon}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00087}00087\ \ \ \ \ (*this).laEmisora.emitirAnuncioIBeacon(\ (*this).beaconUUID,\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ major,}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ valorCO2,\ \textcolor{comment}{//\ Minor}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (*this).RSSI\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00093}00093\ \ \ \ \ \textcolor{comment}{//\ 3.\ Esperamos\ y\ detenemos}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00094}00094\ \ \ \ \ \mbox{\hyperlink{_l_e_d_8h_a2fb17dd710d89b92e59a349551733fa0}{esperar}}(\ tiempoEspera\ );}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00095}00095\ \ \ \ \ (*this).laEmisora.detenerAnuncio();}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00096}00096\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00097}00097\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00098}00098\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00099}00099\ \textcolor{comment}{\ \ \ *\ @brief\ Publica\ una\ medición\ de\ Temperatura.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ *\ @param\ valorTemperatura\ Valor\ térmico\ (se\ coloca\ en\ el\ campo\ Minor).}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ *\ @param\ contador\ Valor\ incremental.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00102}00102\ \textcolor{comment}{\ \ \ *\ @param\ tiempoEspera\ Duración\ del\ anuncio\ en\ milisegundos.}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00103}00103\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00104}\mbox{\hyperlink{class_publicador_a674ec7d8321b9792835cd935c6196dec}{00104}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_publicador_a674ec7d8321b9792835cd935c6196dec}{publicarTemperatura}}(\ int16\_t\ valorTemperatura,}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ contador,\ \textcolor{keywordtype}{long}\ tiempoEspera\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00107}00107\ \ \ \ \ uint16\_t\ major\ =\ (\mbox{\hyperlink{class_publicador_a0dbad8398e97eaf1d6ecdd854f286d38aba4e4bf52d95cc981259e2a2192e6047}{MedicionesID::TEMPERATURA}}\ <<\ 8)\ +\ contador;}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00108}00108\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00109}00109\ \ \ \ \ (*this).laEmisora.emitirAnuncioIBeacon(\ (*this).beaconUUID,\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ major,}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ valorTemperatura,\ \textcolor{comment}{//\ Minor}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (*this).RSSI\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00115}00115\ \ \ \ \ \mbox{\hyperlink{_l_e_d_8h_a2fb17dd710d89b92e59a349551733fa0}{esperar}}(\ tiempoEspera\ );}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00116}00116\ \ \ \ \ (*this).laEmisora.detenerAnuncio();}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00117}00117\ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00118}00118\ \ \ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00119}00119\ \};\ \textcolor{comment}{//\ class}}
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_publicador_8h_source_l00121}00121\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

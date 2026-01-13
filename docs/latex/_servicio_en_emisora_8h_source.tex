@@ -1,0 +1,216 @@
+\doxysection{Servicio\+En\+Emisora.\+h}
+\hypertarget{_servicio_en_emisora_8h_source}{}\label{_servicio_en_emisora_8h_source}\index{src/HolaMundoIBeacon/ServicioEnEmisora.h@{src/HolaMundoIBeacon/ServicioEnEmisora.h}}
+\mbox{\hyperlink{_servicio_en_emisora_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00001}00001\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ ServicioEnEmisora.h}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ Gestión\ de\ Servicios\ y\ Características\ GATT\ para\ BLE.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ Rocio}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ 11/11/2025}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00006}00006\ \textcolor{comment}{\ *\ @details\ Este\ archivo\ define\ las\ clases\ necesarias\ para\ crear\ un\ perfil\ GATT}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00007}00007\ \textcolor{comment}{\ *\ personalizado,\ permitiendo\ la\ lectura,\ escritura\ y\ notificación\ de\ datos}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00008}00008\ \textcolor{comment}{\ *\ a\ través\ de\ conexiones\ Bluetooth.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00009}00009\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00011}00011\ \textcolor{preprocessor}{\#ifndef\ SERVICIO\_EMISORA\_H\_INCLUIDO}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00012}00012\ \textcolor{preprocessor}{\#define\ SERVICIO\_EMISORA\_H\_INCLUIDO}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00015}00015\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00016}00016\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00017}00017\ \textcolor{comment}{\ *\ @brief\ Invierte\ el\ orden\ de\ los\ elementos\ en\ un\ array.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00018}00018\ \textcolor{comment}{\ *\ @tparam\ T\ Tipo\ de\ los\ elementos\ del\ array.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00019}00019\ \textcolor{comment}{\ *\ @param\ p\ Puntero\ al\ array.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00020}00020\ \textcolor{comment}{\ *\ @param\ n\ Número\ de\ elementos.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00021}00021\ \textcolor{comment}{\ *\ @return\ Puntero\ al\ array\ modificado.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00022}00022\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00023}00023\ \textcolor{keyword}{template}<\ \textcolor{keyword}{typename}\ T\ >}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00024}\mbox{\hyperlink{_servicio_en_emisora_8h_aada7529d57b6678988eaa3e0acf84aff}{00024}}\ T\ *\ \mbox{\hyperlink{_servicio_en_emisora_8h_aada7529d57b6678988eaa3e0acf84aff}{alReves}}(\ T\ *\ p,\ \textcolor{keywordtype}{int}\ n\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00025}00025\ \ \ T\ aux;}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00026}00026\ \ \ \textcolor{keywordflow}{for}(\ \textcolor{keywordtype}{int}\ i=0;\ i\ <\ n/2;\ i++\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00027}00027\ \ \ \ \ aux\ =\ p[i];}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00028}00028\ \ \ \ \ p[i]\ =\ p[n-\/i-\/1];}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00029}00029\ \ \ \ \ p[n-\/i-\/1]\ =\ aux;}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00030}00030\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00031}00031\ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00033}00033\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00034}00034\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00035}00035\ \textcolor{comment}{\ *\ @brief\ Convierte\ una\ cadena\ de\ texto\ a\ un\ array\ de\ uint8\_t\ en\ orden\ inverso.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00036}00036\ \textcolor{comment}{\ *\ @details\ Útil\ para\ convertir\ strings\ de\ UUID\ a\ formato\ Little\ Endian\ requerido\ por\ la\ pila\ BLE.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00037}00037\ \textcolor{comment}{\ *\ @param\ pString\ Cadena\ de\ origen\ (C-\/string).}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00038}00038\ \textcolor{comment}{\ *\ @param\ pUint\ Puntero\ al\ array\ de\ destino.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00039}00039\ \textcolor{comment}{\ *\ @param\ tamMax\ Tamaño\ máximo\ a\ copiar\ (normalmente\ 16\ para\ UUIDs).}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00040}00040\ \textcolor{comment}{\ *\ @return\ Puntero\ al\ array\ de\ destino.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00041}00041\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00042}\mbox{\hyperlink{_servicio_en_emisora_8h_a4493ee26019e14ff5945192a58d5da3a}{00042}}\ uint8\_t\ *\ \mbox{\hyperlink{_servicio_en_emisora_8h_a4493ee26019e14ff5945192a58d5da3a}{stringAUint8AlReves}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ pString,\ uint8\_t\ *\ pUint,\ \textcolor{keywordtype}{int}\ tamMax\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00043}00043\ \ \ \textcolor{keywordtype}{int}\ longitudString\ =\ strlen(\ pString\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00044}00044\ \ \ \textcolor{keywordtype}{int}\ longitudCopiar\ =\ (\ longitudString\ >\ tamMax\ ?\ tamMax\ :\ longitudString\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00045}00045\ \ \ \textcolor{keywordflow}{for}(\ \textcolor{keywordtype}{int}\ i=0;\ i<=longitudCopiar-\/1;\ i++\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00046}00046\ \ \ \ \ pUint[\ tamMax-\/i-\/1\ ]\ =\ pString[\ i\ ];}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00047}00047\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00048}00048\ \ \ \textcolor{keywordflow}{return}\ pUint;}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00050}00050\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00051}00051\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00052}00052\ \textcolor{comment}{\ *\ @class\ ServicioEnEmisora}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00053}00053\ \textcolor{comment}{\ *\ @brief\ Clase\ que\ representa\ un\ Servicio\ GATT\ de\ Bluetooth.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00054}00054\ \textcolor{comment}{\ *\ @details\ Contiene\ una\ colección\ de\ características\ y\ gestiona\ su\ activación.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00055}00055\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00056}\mbox{\hyperlink{class_servicio_en_emisora}{00056}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_servicio_en_emisora_a17d9dcafb552b3e76bc7ff2e6fb238f2}{ServicioEnEmisora}}\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00058}00058\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00059}00059\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00060}00060\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ *\ @brief\ Alias\ para\ el\ callback\ invocado\ cuando\ un\ cliente\ escribe\ en\ una\ característica.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00062}00062\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00063}\mbox{\hyperlink{class_servicio_en_emisora_a73d39d2b831523295a29131e94aa026f}{00063}}\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_servicio_en_emisora_a73d39d2b831523295a29131e94aa026f}{CallbackCaracteristicaEscrita}}\ =\ void\ (\ uint16\_t\ conn\_handle,}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BLECharacteristic\ *\ chr,}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *\ data,\ uint16\_t\ len);\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00066}00066\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00067}00067\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00068}00068\ \textcolor{comment}{\ \ \ *\ @class\ Caracteristica}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00069}00069\ \textcolor{comment}{\ \ \ *\ @brief\ Representa\ una\ Característica\ GATT\ dentro\ de\ un\ servicio.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00070}00070\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00071}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica}{00071}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a639f47133a8406e84aa237c123fd2e63}{Caracteristica}}\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00072}00072\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00073}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ac408acdaae053ae4c005f1f9162d60c7}{00073}}\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ac408acdaae053ae4c005f1f9162d60c7}{uuidCaracteristica}}[16]\ =\ \{\ \textcolor{charliteral}{'0'},\textcolor{charliteral}{'1'},\textcolor{charliteral}{'2'},\textcolor{charliteral}{'3'},\textcolor{charliteral}{'4'},\textcolor{charliteral}{'5'},\textcolor{charliteral}{'6'},\textcolor{charliteral}{'7'},\textcolor{charliteral}{'8'},\textcolor{charliteral}{'9'},\textcolor{charliteral}{'A'},\textcolor{charliteral}{'B'},\textcolor{charliteral}{'C'},\textcolor{charliteral}{'D'},\textcolor{charliteral}{'E'},\textcolor{charliteral}{'F'}\ \};}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00074}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{00074}}\ \ \ \ \ BLECharacteristic\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}};}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00076}00076\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Constructor\ básico\ de\ característica.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ \ \ *\ @param\ nombreCaracteristica\_\ UUID\ de\ la\ característica\ como\ string.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00080}00080\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00081}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a639f47133a8406e84aa237c123fd2e63}{00081}}\ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a639f47133a8406e84aa237c123fd2e63}{Caracteristica}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ nombreCaracteristica\_\ )}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00082}00082\ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}}(\ \mbox{\hyperlink{_servicio_en_emisora_8h_a4493ee26019e14ff5945192a58d5da3a}{stringAUint8AlReves}}(\ nombreCaracteristica\_,\ \&\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ac408acdaae053ae4c005f1f9162d60c7}{uuidCaracteristica}}[0],\ 16\ )\ )}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00083}00083\ \ \ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00084}00084\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00085}00085\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00086}00086\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Constructor\ completo\ de\ característica.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00087}00087\ \textcolor{comment}{\ \ \ \ \ *\ @param\ nombreCaracteristica\_\ UUID\ en\ formato\ string.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00088}00088\ \textcolor{comment}{\ \ \ \ \ *\ @param\ props\ Propiedades\ (Read,\ Write,\ Notify...).}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00089}00089\ \textcolor{comment}{\ \ \ \ \ *\ @param\ permisoRead\ Permisos\ de\ seguridad\ para\ lectura.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00090}00090\ \textcolor{comment}{\ \ \ \ \ *\ @param\ permisoWrite\ Permisos\ de\ seguridad\ para\ escritura.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00091}00091\ \textcolor{comment}{\ \ \ \ \ *\ @param\ tam\ Tamaño\ máximo\ de\ los\ datos\ en\ bytes.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00092}00092\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00093}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a646c15ae6b57fc25d144d2e2ed160c0c}{00093}}\ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a646c15ae6b57fc25d144d2e2ed160c0c}{Caracteristica}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ nombreCaracteristica\_\ ,}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ props,}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ SecureMode\_t\ permisoRead,}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ SecureMode\_t\ permisoWrite,\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ tam\ )\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00098}00098\ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a639f47133a8406e84aa237c123fd2e63}{Caracteristica}}(\ nombreCaracteristica\_\ )\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00099}00099\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00100}00100\ \ \ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a7fe53370615887c50304300457c1114c}{asignarPropiedadesPermisosYTamanyoDatos}}(\ props,\ permisoRead,\ permisoWrite,\ tam\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00101}00101\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00103}00103\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00104}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a1d99a13ca16b3306b11e6d7ad50d059e}{00104}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a1d99a13ca16b3306b11e6d7ad50d059e}{asignarPropiedades}}\ (\ uint8\_t\ props\ )\ \{\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}}.setProperties(\ props\ );\ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00105}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a0b9429aace3771c7809a9b65ea84482e}{00105}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a0b9429aace3771c7809a9b65ea84482e}{asignarPermisos}}(\ SecureMode\_t\ permisoRead,\ SecureMode\_t\ permisoWrite\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00106}00106\ \ \ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}}.setPermission(\ permisoRead,\ permisoWrite\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00108}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a224fe13056debc329ea6e68458821f54}{00108}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a224fe13056debc329ea6e68458821f54}{asignarTamanyoDatos}}(\ uint8\_t\ tam\ )\ \{\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}}.setMaxLen(\ tam\ );\ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00110}00110\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00111}00111\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00112}00112\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Configura\ las\ propiedades,\ permisos\ y\ tamaño\ de\ la\ característica.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00114}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a7fe53370615887c50304300457c1114c}{00114}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a7fe53370615887c50304300457c1114c}{asignarPropiedadesPermisosYTamanyoDatos}}(\ uint8\_t\ props,}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SecureMode\_t\ permisoRead,}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SecureMode\_t\ permisoWrite,\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ tam\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00118}00118\ \ \ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a1d99a13ca16b3306b11e6d7ad50d059e}{asignarPropiedades}}(\ props\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00119}00119\ \ \ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a0b9429aace3771c7809a9b65ea84482e}{asignarPermisos}}(\ permisoRead,\ permisoWrite\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00120}00120\ \ \ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a224fe13056debc329ea6e68458821f54}{asignarTamanyoDatos}}(\ tam\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00122}00122\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00123}00123\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00124}00124\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Escribe\ datos\ de\ forma\ local\ en\ la\ característica.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00125}00125\ \textcolor{comment}{\ \ \ \ \ *\ @param\ str\ Cadena\ a\ escribir.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00126}00126\ \textcolor{comment}{\ \ \ \ \ *\ @return\ Número\ de\ bytes\ escritos.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00127}00127\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00128}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ac6642d92b4f2d80ee6c21081972987d7}{00128}}\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ac6642d92b4f2d80ee6c21081972987d7}{escribirDatos}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ str\ )\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}}.write(\ str\ );\ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00129}00129\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00130}00130\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00131}00131\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Envía\ una\ notificación\ a\ los\ clientes\ suscritos.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00132}00132\ \textcolor{comment}{\ \ \ \ \ *\ @param\ str\ Datos\ a\ notificar.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00133}00133\ \textcolor{comment}{\ \ \ \ \ *\ @return\ Resultado\ de\ la\ operación\ de\ notificación.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00134}00134\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00135}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ae3369332d51fb6e70a300b54c3a4f95d}{00135}}\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ae3369332d51fb6e70a300b54c3a4f95d}{notificarDatos}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ str\ )\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}}.notify(\ str\ );\ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00136}00136\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00137}00137\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00138}00138\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Configura\ el\ callback\ de\ escritura.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00139}00139\ \textcolor{comment}{\ \ \ \ \ *\ @param\ cb\ Función\ a\ ejecutar\ cuando\ un\ cliente\ escribe\ datos.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00140}00140\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00141}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ac3355c1918c2eddf58d34df1b30dd60d}{00141}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ac3355c1918c2eddf58d34df1b30dd60d}{instalarCallbackCaracteristicaEscrita}}(\ \mbox{\hyperlink{class_servicio_en_emisora_a73d39d2b831523295a29131e94aa026f}{CallbackCaracteristicaEscrita}}\ cb\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00142}00142\ \ \ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}}.setWriteCallback(\ cb\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00144}00144\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00145}00145\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00146}00146\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Activa\ la\ característica\ para\ que\ sea\ visible\ por\ el\ servicio.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00147}00147\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00148}\mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ad93e0c5998aeb15c920cd5d6db7a0e3b}{00148}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_ad93e0c5998aeb15c920cd5d6db7a0e3b}{activar}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00149}00149\ \ \ \ \ \ \ err\_t\ error\ =\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica_a385b01fc1535fa1ba0cb62918d70cdcd}{laCaracteristica}}.begin();}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00150}00150\ \ \ \ \ \ \ Globales::elPuerto.escribir(\ \textcolor{stringliteral}{"{}Char.begin()\ error:\ "{}}\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00151}00151\ \ \ \ \ \ \ Globales::elPuerto.escribir(\ error\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00152}00152\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00154}00154\ \ \ \};\ \textcolor{comment}{//\ class\ Caracteristica}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00155}00155\ \ \ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00156}00156\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00157}\mbox{\hyperlink{class_servicio_en_emisora_a6c8dad351b6453c0a08a1c5e4a78c7dd}{00157}}\ \ \ uint8\_t\ \mbox{\hyperlink{class_servicio_en_emisora_a6c8dad351b6453c0a08a1c5e4a78c7dd}{uuidServicio}}[16]\ =\ \{\ \textcolor{charliteral}{'0'},\textcolor{charliteral}{'1'},\textcolor{charliteral}{'2'},\textcolor{charliteral}{'3'},\textcolor{charliteral}{'4'},\textcolor{charliteral}{'5'},\textcolor{charliteral}{'6'},\textcolor{charliteral}{'7'},\textcolor{charliteral}{'8'},\textcolor{charliteral}{'9'},\textcolor{charliteral}{'A'},\textcolor{charliteral}{'B'},\textcolor{charliteral}{'C'},\textcolor{charliteral}{'D'},\textcolor{charliteral}{'E'},\textcolor{charliteral}{'F'}\ \};}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00158}\mbox{\hyperlink{class_servicio_en_emisora_a98d4770be02c0fff4cc9c67660fd3a62}{00158}}\ \ \ BLEService\ \mbox{\hyperlink{class_servicio_en_emisora_a98d4770be02c0fff4cc9c67660fd3a62}{elServicio}};}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00159}\mbox{\hyperlink{class_servicio_en_emisora_ab4d755931fcd34d29ead49663cf523f4}{00159}}\ \ \ std::vector<\ Caracteristica\ *\ >\ \mbox{\hyperlink{class_servicio_en_emisora_ab4d755931fcd34d29ead49663cf523f4}{lasCaracteristicas}};\ \textcolor{comment}{///<\ Lista\ de\ punteros\ a\ características\ vinculadas.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00161}00161\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00162}00162\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00163}00163\ \textcolor{comment}{\ \ \ *\ @brief\ Crea\ un\ nuevo\ servicio\ BLE.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00164}00164\ \textcolor{comment}{\ \ \ *\ @param\ nombreServicio\_\ UUID\ del\ servicio\ como\ string.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00165}00165\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00166}\mbox{\hyperlink{class_servicio_en_emisora_a17d9dcafb552b3e76bc7ff2e6fb238f2}{00166}}\ \ \ \mbox{\hyperlink{class_servicio_en_emisora_a17d9dcafb552b3e76bc7ff2e6fb238f2}{ServicioEnEmisora}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ nombreServicio\_\ )}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00167}00167\ \ \ :\ \mbox{\hyperlink{class_servicio_en_emisora_a98d4770be02c0fff4cc9c67660fd3a62}{elServicio}}(\ \mbox{\hyperlink{_servicio_en_emisora_8h_a4493ee26019e14ff5945192a58d5da3a}{stringAUint8AlReves}}(\ nombreServicio\_,\ \&\mbox{\hyperlink{class_servicio_en_emisora_a6c8dad351b6453c0a08a1c5e4a78c7dd}{uuidServicio}}[0],\ 16\ )\ )}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00168}00168\ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00169}00169\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00170}00170\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00171}00171\ \textcolor{comment}{\ \ \ *\ @brief\ Muestra\ el\ UUID\ del\ servicio\ por\ el\ puerto\ serie.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00172}00172\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00173}\mbox{\hyperlink{class_servicio_en_emisora_a59267e82dca13b83913e578efacce794}{00173}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_a59267e82dca13b83913e578efacce794}{escribeUUID}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00174}00174\ \ \ \ \ Serial.println\ (\ \textcolor{stringliteral}{"{}**********"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00175}00175\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<=\ 15;\ i++)\ \{\ Serial.print(\ (\textcolor{keywordtype}{char})\ \mbox{\hyperlink{class_servicio_en_emisora_a6c8dad351b6453c0a08a1c5e4a78c7dd}{uuidServicio}}[i]\ );\ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00176}00176\ \ \ \ \ Serial.println\ (\ \textcolor{stringliteral}{"{}\(\backslash\)n**********"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00177}00177\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00178}00178\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00179}00179\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00180}00180\ \textcolor{comment}{\ \ \ *\ @brief\ Añade\ una\ característica\ a\ la\ lista\ de\ este\ servicio.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00181}00181\ \textcolor{comment}{\ \ \ *\ @param\ car\ Referencia\ a\ la\ característica.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00182}00182\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00183}\mbox{\hyperlink{class_servicio_en_emisora_af25a77d5c2b3edfe5c99fc9fa00729bf}{00183}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_af25a77d5c2b3edfe5c99fc9fa00729bf}{anyadirCaracteristica}}(\ \mbox{\hyperlink{class_servicio_en_emisora_1_1_caracteristica}{Caracteristica}}\ \&\ car\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00184}00184\ \ \ \ \ \mbox{\hyperlink{class_servicio_en_emisora_ab4d755931fcd34d29ead49663cf523f4}{lasCaracteristicas}}.push\_back(\ \&\ car\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00185}00185\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00186}00186\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00187}00187\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00188}00188\ \textcolor{comment}{\ \ \ *\ @brief\ Activa\ el\ servicio\ y\ todas\ sus\ características\ asociadas.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00189}00189\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00190}\mbox{\hyperlink{class_servicio_en_emisora_a387f170420610e1ba1fe71b471c1ca23}{00190}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servicio_en_emisora_a387f170420610e1ba1fe71b471c1ca23}{activarServicio}}(\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00191}00191\ \ \ \ \ err\_t\ error\ =\ \mbox{\hyperlink{class_servicio_en_emisora_a98d4770be02c0fff4cc9c67660fd3a62}{elServicio}}.begin();}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00192}00192\ \ \ \ \ Serial.print(\ \textcolor{stringliteral}{"{}Service.begin()\ error:\ "{}}\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00193}00193\ \ \ \ \ Serial.println(\ error\ );}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00195}00195\ \ \ \ \ \textcolor{keywordflow}{for}(\ \textcolor{keyword}{auto}\ pCar\ :\ \mbox{\hyperlink{class_servicio_en_emisora_ab4d755931fcd34d29ead49663cf523f4}{lasCaracteristicas}}\ )\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00196}00196\ \ \ \ \ \ \ pCar-\/>activar();}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00197}00197\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00198}00198\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00199}00199\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00200}00200\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00201}00201\ \textcolor{comment}{\ \ \ *\ @brief\ Operador\ de\ conversión\ para\ compatibilidad\ con\ la\ librería\ Bluefruit.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00202}00202\ \textcolor{comment}{\ \ \ *\ @return\ Referencia\ al\ objeto\ BLEService\ interno.}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00203}00203\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00204}\mbox{\hyperlink{class_servicio_en_emisora_a0d04b53b2379140293924ef1ecbfeebe}{00204}}\ \ \ \textcolor{keyword}{operator}\ BLEService\&()\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00205}00205\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_servicio_en_emisora_a98d4770be02c0fff4cc9c67660fd3a62}{elServicio}};}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00206}00206\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00207}00207\ \ \ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00208}00208\ \};\ \textcolor{comment}{//\ class}}
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_servicio_en_emisora_8h_source_l00210}00210\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
