@@ -1,0 +1,168 @@
+\doxysection{LED Class Reference}
+\hypertarget{class_l_e_d}{}\label{class_l_e_d}\index{LED@{LED}}
+
+
+Clase para gestionar un diodo \doxylink{class_l_e_d}{LED} conectado a un pin GPIO.  
+
+
+
+
+{\ttfamily \#include $<$LED.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_l_e_d_a027bcd6d546b47fd3ef22685ed1f73e2}{LED}} (int numero)
+\begin{DoxyCompactList}\small\item\em Constructor de la clase \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_l_e_d_a58660bafc0f4d6016392feabac555812}{encender}} ()
+\begin{DoxyCompactList}\small\item\em Enciende el \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_l_e_d_a7f961959fa7405fec54de6121415db80}{apagar}} ()
+\begin{DoxyCompactList}\small\item\em Apaga el \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_l_e_d_a9b1361dbee5de756d142b1a2c3e685da}{alternar}} ()
+\begin{DoxyCompactList}\small\item\em Cambia el estado actual del \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_l_e_d_a7431e9efb39a2890f75b4e235b8f617e}{brillar}} (long tiempo)
+\begin{DoxyCompactList}\small\item\em Enciende el \doxylink{class_l_e_d}{LED} durante un tiempo y luego lo apaga. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b}{numero\+LED}}
+\begin{DoxyCompactList}\small\item\em Número del pin GPIO al que está conectado el \doxylink{class_l_e_d}{LED}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_l_e_d_a24c773334fcf58613f20246a0f22640e}{encendido}}
+\begin{DoxyCompactList}\small\item\em Estado interno del \doxylink{class_l_e_d}{LED} (true = encendido, false = apagado). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase para gestionar un diodo \doxylink{class_l_e_d}{LED} conectado a un pin GPIO. 
+
+Permite realizar operaciones básicas como encender, apagar, alternar el estado o realizar un parpadeo (brillar). 
+
+Definition at line \mbox{\hyperlink{_l_e_d_8h_source_l00026}{26}} of file \mbox{\hyperlink{_l_e_d_8h_source}{LED.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_l_e_d_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_l_e_d_a027bcd6d546b47fd3ef22685ed1f73e2}\index{LED@{LED}!LED@{LED}}
+\index{LED@{LED}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{LED()}{LED()}}
+{\footnotesize\ttfamily \label{class_l_e_d_a027bcd6d546b47fd3ef22685ed1f73e2} 
+LED\+::\+LED (\begin{DoxyParamCaption}\item[{int}]{numero}{}\end{DoxyParamCaption})}
+
+
+
+Constructor de la clase \doxylink{class_l_e_d}{LED}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em numero} & Número del pin donde se conecta el \doxylink{class_l_e_d}{LED}.\\
+\hline
+\end{DoxyParams}
+Configura el pin como salida (OUTPUT) y asegura que el \doxylink{class_l_e_d}{LED} comience en estado apagado. 
+
+Definition at line \mbox{\hyperlink{_l_e_d_8h_source_l00039}{39}} of file \mbox{\hyperlink{_l_e_d_8h_source}{LED.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_l_e_d_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_l_e_d_a9b1361dbee5de756d142b1a2c3e685da}\index{LED@{LED}!alternar@{alternar}}
+\index{alternar@{alternar}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{alternar()}{alternar()}}
+{\footnotesize\ttfamily \label{class_l_e_d_a9b1361dbee5de756d142b1a2c3e685da} 
+void LED\+::alternar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Cambia el estado actual del \doxylink{class_l_e_d}{LED}. 
+
+Si el \doxylink{class_l_e_d}{LED} está encendido lo apaga, y viceversa. 
+
+Definition at line \mbox{\hyperlink{_l_e_d_8h_source_l00068}{68}} of file \mbox{\hyperlink{_l_e_d_8h_source}{LED.\+h}}.
+
+\Hypertarget{class_l_e_d_a7f961959fa7405fec54de6121415db80}\index{LED@{LED}!apagar@{apagar}}
+\index{apagar@{apagar}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{apagar()}{apagar()}}
+{\footnotesize\ttfamily \label{class_l_e_d_a7f961959fa7405fec54de6121415db80} 
+void LED\+::apagar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Apaga el \doxylink{class_l_e_d}{LED}. 
+
+Pone el pin en nivel bajo (LOW) y actualiza el estado interno. 
+
+Definition at line \mbox{\hyperlink{_l_e_d_8h_source_l00059}{59}} of file \mbox{\hyperlink{_l_e_d_8h_source}{LED.\+h}}.
+
+\Hypertarget{class_l_e_d_a7431e9efb39a2890f75b4e235b8f617e}\index{LED@{LED}!brillar@{brillar}}
+\index{brillar@{brillar}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{brillar()}{brillar()}}
+{\footnotesize\ttfamily \label{class_l_e_d_a7431e9efb39a2890f75b4e235b8f617e} 
+void LED\+::brillar (\begin{DoxyParamCaption}\item[{long}]{tiempo}{}\end{DoxyParamCaption})}
+
+
+
+Enciende el \doxylink{class_l_e_d}{LED} durante un tiempo y luego lo apaga. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tiempo} & Duración del encendido en milisegundos.\\
+\hline
+\end{DoxyParams}
+Esta función es bloqueante, ya que utiliza la función \doxylink{_l_e_d_8h_a2fb17dd710d89b92e59a349551733fa0}{esperar()}. 
+
+Definition at line \mbox{\hyperlink{_l_e_d_8h_source_l00081}{81}} of file \mbox{\hyperlink{_l_e_d_8h_source}{LED.\+h}}.
+
+\Hypertarget{class_l_e_d_a58660bafc0f4d6016392feabac555812}\index{LED@{LED}!encender@{encender}}
+\index{encender@{encender}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{encender()}{encender()}}
+{\footnotesize\ttfamily \label{class_l_e_d_a58660bafc0f4d6016392feabac555812} 
+void LED\+::encender (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Enciende el \doxylink{class_l_e_d}{LED}. 
+
+Pone el pin en nivel alto (HIGH) y actualiza el estado interno. 
+
+Definition at line \mbox{\hyperlink{_l_e_d_8h_source_l00050}{50}} of file \mbox{\hyperlink{_l_e_d_8h_source}{LED.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_l_e_d_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_l_e_d_a24c773334fcf58613f20246a0f22640e}\index{LED@{LED}!encendido@{encendido}}
+\index{encendido@{encendido}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{encendido}{encendido}}
+{\footnotesize\ttfamily \label{class_l_e_d_a24c773334fcf58613f20246a0f22640e} 
+bool LED\+::encendido\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Estado interno del \doxylink{class_l_e_d}{LED} (true = encendido, false = apagado). 
+
+
+
+Definition at line \mbox{\hyperlink{_l_e_d_8h_source_l00029}{29}} of file \mbox{\hyperlink{_l_e_d_8h_source}{LED.\+h}}.
+
+\Hypertarget{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b}\index{LED@{LED}!numeroLED@{numeroLED}}
+\index{numeroLED@{numeroLED}!LED@{LED}}
+\doxysubsubsection{\texorpdfstring{numeroLED}{numeroLED}}
+{\footnotesize\ttfamily \label{class_l_e_d_aa17a4e75c1a3aeb1835cccb36667138b} 
+int LED\+::numero\+LED\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Número del pin GPIO al que está conectado el \doxylink{class_l_e_d}{LED}. 
+
+
+
+Definition at line \mbox{\hyperlink{_l_e_d_8h_source_l00028}{28}} of file \mbox{\hyperlink{_l_e_d_8h_source}{LED.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Hola\+Mundo\+IBeacon/\mbox{\hyperlink{_l_e_d_8h}{LED.\+h}}\end{DoxyCompactItemize}

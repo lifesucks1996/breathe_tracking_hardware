@@ -1,0 +1,349 @@
+\doxysection{src/\+Hola\+Mundo\+IBeacon/\+Medidor.h File Reference}
+\hypertarget{_medidor_8h}{}\label{_medidor_8h}\index{src/HolaMundoIBeacon/Medidor.h@{src/HolaMundoIBeacon/Medidor.h}}
+
+
+Clase para la gestión de sensores analógicos y simulados.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_medidor}{Medidor}}
+\begin{DoxyCompactList}\small\item\em Se encarga de la adquisición y procesamiento de datos ambientales. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_medidor_8h_a17e059995c43b2ae3783c684af2d23ce}{O3\+\_\+\+PIN\+\_\+\+VGAS}}~A5
+\begin{DoxyCompactList}\small\item\em Pin para el voltaje de gas del sensor de ozono. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_medidor_8h_aa83f670a481c5ee394d1f1c2511e6182}{O3\+\_\+\+PIN\+\_\+\+VREF}}~A4
+\begin{DoxyCompactList}\small\item\em Pin para el voltaje de referencia del sensor de ozono. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_medidor_8h_aa67da65e8c9805866a4da81803db36ea}{O3\+\_\+\+VDD}}~1.\+20f
+\begin{DoxyCompactList}\small\item\em Voltaje de alimentación del sensor/\+ADC (V). \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_medidor_8h_a6cd2c69e0d3dfeb8bef0a94a2c73b9d4}{O3\+\_\+\+ADC\+\_\+\+BITS}}~12
+\begin{DoxyCompactList}\small\item\em Resolución del ADC para ozono (12 bits). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const float \mbox{\hyperlink{_medidor_8h_a8bf1558a23b4a238402878a3f7838101}{SENSIBILIDAD\+\_\+\+SENSOR}} = -\/44.\+26f
+\begin{DoxyCompactList}\small\item\em Sensibilidad del sensor electroquímico en n\+A/ppm. \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{_medidor_8h_a32976ce235f46a567c18b2ae622cdfb7}{GAIN\+\_\+\+TIA}} = 499.\+0f
+\begin{DoxyCompactList}\small\item\em Resistencia de ganancia del amplificador de transimpedancia (TIA) en Ohmios. \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{_medidor_8h_aae1a25c5e24208abdc667629f7a9c3fe}{CORRECCION\+\_\+\+SLOPE}} = 1.\+0f
+\begin{DoxyCompactList}\small\item\em Factor de escala para ajuste de ganancia (m\textquotesingle{}). \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{_medidor_8h_a75d0054a3c8b2216f1a26a4eda1f6d48}{CORRECCION\+\_\+\+OFFSET}} = 0.\+0f
+\begin{DoxyCompactList}\small\item\em Desplazamiento para ajuste de línea base (b\textquotesingle{}). \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\+\_\+\+SIMULADO}} \mbox{[}$\,$\mbox{]} = \{100, 650, 45, 1200, 950, 800, 300\}
+\begin{DoxyCompactList}\small\item\em Array de valores de Ozono simulados (ppm \texorpdfstring{$\ast$}{*} 1000). \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{_medidor_8h_ab94909326f0ceddd8b5bad737ea31381}{NUM\+\_\+\+O3\+\_\+\+VALORES}} = sizeof(\mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\+\_\+\+SIMULADO}}) / sizeof(\mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\+\_\+\+SIMULADO}}\mbox{[}0\mbox{]})
+\item 
+const int \mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\+\_\+\+SIMULADO}} \mbox{[}$\,$\mbox{]} = \{1400, 1350, 1360, 1280, 1250, 1300, 1450\}
+\begin{DoxyCompactList}\small\item\em Array de valores de CO2 simulados (ppm). \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{_medidor_8h_ae17495ef4475e838aefa92525e10d4df}{NUM\+\_\+\+CO2\+\_\+\+VALORES}} = sizeof(\mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\+\_\+\+SIMULADO}}) / sizeof(\mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\+\_\+\+SIMULADO}}\mbox{[}0\mbox{]})
+\item 
+const int \mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\+\_\+\+SIMULADA}} \mbox{[}$\,$\mbox{]} = \{320, 345, 366, 389, 335, 368, 353, 360, 400, 320\}
+\begin{DoxyCompactList}\small\item\em Array de temperaturas simuladas (ºC \texorpdfstring{$\ast$}{*} 10). \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{_medidor_8h_afdca68679ee61c61d537000dd5e5a433}{NUM\+\_\+\+TEMP\+\_\+\+VALORES}} = sizeof(\mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\+\_\+\+SIMULADA}}) / sizeof(\mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\+\_\+\+SIMULADA}}\mbox{[}0\mbox{]})
+\item 
+const int \mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{BAT\+\_\+\+SIMULADA}} \mbox{[}$\,$\mbox{]} = \{15, 14, 12, 10, 8, 7, 3, 1\}
+\begin{DoxyCompactList}\small\item\em Array de porcentajes de batería simulados. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{_medidor_8h_ae14bd1b14bea466b8db312e9d7ab905b}{NUM\+\_\+\+BAT\+\_\+\+VALORES}} = sizeof(\mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{BAT\+\_\+\+SIMULADA}}) / sizeof(\mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{BAT\+\_\+\+SIMULADA}}\mbox{[}0\mbox{]})
+\item 
+const float \mbox{\hyperlink{_medidor_8h_a8557af94cdae9d232b82a9b09f9ba32b}{BATT\+\_\+\+MAX\+\_\+\+VOLTS}} = 4.\+20f
+\begin{DoxyCompactList}\small\item\em Voltaje Li\+Po al 100\%. \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{_medidor_8h_a72d3c9c80013139b3f07092b88c554d0}{BATT\+\_\+\+MIN\+\_\+\+VOLTS}} = 3.\+30f
+\begin{DoxyCompactList}\small\item\em Voltaje Li\+Po al 0\%. \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{_medidor_8h_a74a1cea532a8e6925dfdb5fff229b742}{VDD}} = 3.\+30f
+\begin{DoxyCompactList}\small\item\em Referencia de voltaje del sistema (V). \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{_medidor_8h_a2ae51919a43a4b992dabc861ce88dfd5}{ADC\+\_\+\+BITS}} = 10
+\begin{DoxyCompactList}\small\item\em Resolución ADC para batería. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase para la gestión de sensores analógicos y simulados. 
+
+\begin{DoxyAuthor}{Author}
+Rocio 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+11/11/2025
+\end{DoxyDate}
+Este archivo contiene la lógica para calcular concentraciones de O3 mediante un sensor electroquímico, así como la estimación del nivel de batería y la generación de datos simulados para CO2 y Temperatura. 
+
+Definition in file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+
+
+\label{doc-define-members}
+\Hypertarget{_medidor_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_medidor_8h_a6cd2c69e0d3dfeb8bef0a94a2c73b9d4}\index{Medidor.h@{Medidor.h}!O3\_ADC\_BITS@{O3\_ADC\_BITS}}
+\index{O3\_ADC\_BITS@{O3\_ADC\_BITS}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{O3\_ADC\_BITS}{O3\_ADC\_BITS}}
+{\footnotesize\ttfamily \label{_medidor_8h_a6cd2c69e0d3dfeb8bef0a94a2c73b9d4} 
+\#define O3\+\_\+\+ADC\+\_\+\+BITS~12}
+
+
+
+Resolución del ADC para ozono (12 bits). 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00031}{31}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a17e059995c43b2ae3783c684af2d23ce}\index{Medidor.h@{Medidor.h}!O3\_PIN\_VGAS@{O3\_PIN\_VGAS}}
+\index{O3\_PIN\_VGAS@{O3\_PIN\_VGAS}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{O3\_PIN\_VGAS}{O3\_PIN\_VGAS}}
+{\footnotesize\ttfamily \label{_medidor_8h_a17e059995c43b2ae3783c684af2d23ce} 
+\#define O3\+\_\+\+PIN\+\_\+\+VGAS~A5}
+
+
+
+Pin para el voltaje de gas del sensor de ozono. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00020}{20}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_aa83f670a481c5ee394d1f1c2511e6182}\index{Medidor.h@{Medidor.h}!O3\_PIN\_VREF@{O3\_PIN\_VREF}}
+\index{O3\_PIN\_VREF@{O3\_PIN\_VREF}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{O3\_PIN\_VREF}{O3\_PIN\_VREF}}
+{\footnotesize\ttfamily \label{_medidor_8h_aa83f670a481c5ee394d1f1c2511e6182} 
+\#define O3\+\_\+\+PIN\+\_\+\+VREF~A4}
+
+
+
+Pin para el voltaje de referencia del sensor de ozono. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00023}{23}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_aa67da65e8c9805866a4da81803db36ea}\index{Medidor.h@{Medidor.h}!O3\_VDD@{O3\_VDD}}
+\index{O3\_VDD@{O3\_VDD}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{O3\_VDD}{O3\_VDD}}
+{\footnotesize\ttfamily \label{_medidor_8h_aa67da65e8c9805866a4da81803db36ea} 
+\#define O3\+\_\+\+VDD~1.\+20f}
+
+
+
+Voltaje de alimentación del sensor/\+ADC (V). 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00027}{27}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_medidor_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_medidor_8h_a2ae51919a43a4b992dabc861ce88dfd5}\index{Medidor.h@{Medidor.h}!ADC\_BITS@{ADC\_BITS}}
+\index{ADC\_BITS@{ADC\_BITS}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{ADC\_BITS}{ADC\_BITS}}
+{\footnotesize\ttfamily \label{_medidor_8h_a2ae51919a43a4b992dabc861ce88dfd5} 
+const int ADC\+\_\+\+BITS = 10}
+
+
+
+Resolución ADC para batería. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00070}{70}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}\index{Medidor.h@{Medidor.h}!BAT\_SIMULADA@{BAT\_SIMULADA}}
+\index{BAT\_SIMULADA@{BAT\_SIMULADA}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{BAT\_SIMULADA}{BAT\_SIMULADA}}
+{\footnotesize\ttfamily \label{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4} 
+const int BAT\+\_\+\+SIMULADA\mbox{[}$\,$\mbox{]} = \{15, 14, 12, 10, 8, 7, 3, 1\}}
+
+
+
+Array de porcentajes de batería simulados. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00062}{62}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a8557af94cdae9d232b82a9b09f9ba32b}\index{Medidor.h@{Medidor.h}!BATT\_MAX\_VOLTS@{BATT\_MAX\_VOLTS}}
+\index{BATT\_MAX\_VOLTS@{BATT\_MAX\_VOLTS}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{BATT\_MAX\_VOLTS}{BATT\_MAX\_VOLTS}}
+{\footnotesize\ttfamily \label{_medidor_8h_a8557af94cdae9d232b82a9b09f9ba32b} 
+const float BATT\+\_\+\+MAX\+\_\+\+VOLTS = 4.\+20f}
+
+
+
+Voltaje Li\+Po al 100\%. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00067}{67}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a72d3c9c80013139b3f07092b88c554d0}\index{Medidor.h@{Medidor.h}!BATT\_MIN\_VOLTS@{BATT\_MIN\_VOLTS}}
+\index{BATT\_MIN\_VOLTS@{BATT\_MIN\_VOLTS}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{BATT\_MIN\_VOLTS}{BATT\_MIN\_VOLTS}}
+{\footnotesize\ttfamily \label{_medidor_8h_a72d3c9c80013139b3f07092b88c554d0} 
+const float BATT\+\_\+\+MIN\+\_\+\+VOLTS = 3.\+30f}
+
+
+
+Voltaje Li\+Po al 0\%. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00068}{68}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}\index{Medidor.h@{Medidor.h}!CO2\_SIMULADO@{CO2\_SIMULADO}}
+\index{CO2\_SIMULADO@{CO2\_SIMULADO}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{CO2\_SIMULADO}{CO2\_SIMULADO}}
+{\footnotesize\ttfamily \label{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7} 
+const int CO2\+\_\+\+SIMULADO\mbox{[}$\,$\mbox{]} = \{1400, 1350, 1360, 1280, 1250, 1300, 1450\}}
+
+
+
+Array de valores de CO2 simulados (ppm). 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00052}{52}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a75d0054a3c8b2216f1a26a4eda1f6d48}\index{Medidor.h@{Medidor.h}!CORRECCION\_OFFSET@{CORRECCION\_OFFSET}}
+\index{CORRECCION\_OFFSET@{CORRECCION\_OFFSET}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{CORRECCION\_OFFSET}{CORRECCION\_OFFSET}}
+{\footnotesize\ttfamily \label{_medidor_8h_a75d0054a3c8b2216f1a26a4eda1f6d48} 
+const float CORRECCION\+\_\+\+OFFSET = 0.\+0f}
+
+
+
+Desplazamiento para ajuste de línea base (b\textquotesingle{}). 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00042}{42}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_aae1a25c5e24208abdc667629f7a9c3fe}\index{Medidor.h@{Medidor.h}!CORRECCION\_SLOPE@{CORRECCION\_SLOPE}}
+\index{CORRECCION\_SLOPE@{CORRECCION\_SLOPE}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{CORRECCION\_SLOPE}{CORRECCION\_SLOPE}}
+{\footnotesize\ttfamily \label{_medidor_8h_aae1a25c5e24208abdc667629f7a9c3fe} 
+const float CORRECCION\+\_\+\+SLOPE = 1.\+0f}
+
+
+
+Factor de escala para ajuste de ganancia (m\textquotesingle{}). 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00041}{41}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a32976ce235f46a567c18b2ae622cdfb7}\index{Medidor.h@{Medidor.h}!GAIN\_TIA@{GAIN\_TIA}}
+\index{GAIN\_TIA@{GAIN\_TIA}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{GAIN\_TIA}{GAIN\_TIA}}
+{\footnotesize\ttfamily \label{_medidor_8h_a32976ce235f46a567c18b2ae622cdfb7} 
+const float GAIN\+\_\+\+TIA = 499.\+0f}
+
+
+
+Resistencia de ganancia del amplificador de transimpedancia (TIA) en Ohmios. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00037}{37}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_ae14bd1b14bea466b8db312e9d7ab905b}\index{Medidor.h@{Medidor.h}!NUM\_BAT\_VALORES@{NUM\_BAT\_VALORES}}
+\index{NUM\_BAT\_VALORES@{NUM\_BAT\_VALORES}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_BAT\_VALORES}{NUM\_BAT\_VALORES}}
+{\footnotesize\ttfamily \label{_medidor_8h_ae14bd1b14bea466b8db312e9d7ab905b} 
+const int NUM\+\_\+\+BAT\+\_\+\+VALORES = sizeof(\mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{BAT\+\_\+\+SIMULADA}}) / sizeof(\mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{BAT\+\_\+\+SIMULADA}}\mbox{[}0\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00063}{63}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_ae17495ef4475e838aefa92525e10d4df}\index{Medidor.h@{Medidor.h}!NUM\_CO2\_VALORES@{NUM\_CO2\_VALORES}}
+\index{NUM\_CO2\_VALORES@{NUM\_CO2\_VALORES}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_CO2\_VALORES}{NUM\_CO2\_VALORES}}
+{\footnotesize\ttfamily \label{_medidor_8h_ae17495ef4475e838aefa92525e10d4df} 
+const int NUM\+\_\+\+CO2\+\_\+\+VALORES = sizeof(\mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\+\_\+\+SIMULADO}}) / sizeof(\mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\+\_\+\+SIMULADO}}\mbox{[}0\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00053}{53}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_ab94909326f0ceddd8b5bad737ea31381}\index{Medidor.h@{Medidor.h}!NUM\_O3\_VALORES@{NUM\_O3\_VALORES}}
+\index{NUM\_O3\_VALORES@{NUM\_O3\_VALORES}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_O3\_VALORES}{NUM\_O3\_VALORES}}
+{\footnotesize\ttfamily \label{_medidor_8h_ab94909326f0ceddd8b5bad737ea31381} 
+const int NUM\+\_\+\+O3\+\_\+\+VALORES = sizeof(\mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\+\_\+\+SIMULADO}}) / sizeof(\mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\+\_\+\+SIMULADO}}\mbox{[}0\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00048}{48}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_afdca68679ee61c61d537000dd5e5a433}\index{Medidor.h@{Medidor.h}!NUM\_TEMP\_VALORES@{NUM\_TEMP\_VALORES}}
+\index{NUM\_TEMP\_VALORES@{NUM\_TEMP\_VALORES}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_TEMP\_VALORES}{NUM\_TEMP\_VALORES}}
+{\footnotesize\ttfamily \label{_medidor_8h_afdca68679ee61c61d537000dd5e5a433} 
+const int NUM\+\_\+\+TEMP\+\_\+\+VALORES = sizeof(\mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\+\_\+\+SIMULADA}}) / sizeof(\mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\+\_\+\+SIMULADA}}\mbox{[}0\mbox{]})}
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00058}{58}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a959848bb6d89238644a72659cc11f6de}\index{Medidor.h@{Medidor.h}!O3\_SIMULADO@{O3\_SIMULADO}}
+\index{O3\_SIMULADO@{O3\_SIMULADO}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{O3\_SIMULADO}{O3\_SIMULADO}}
+{\footnotesize\ttfamily \label{_medidor_8h_a959848bb6d89238644a72659cc11f6de} 
+const int O3\+\_\+\+SIMULADO\mbox{[}$\,$\mbox{]} = \{100, 650, 45, 1200, 950, 800, 300\}}
+
+
+
+Array de valores de Ozono simulados (ppm \texorpdfstring{$\ast$}{*} 1000). 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00047}{47}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a8bf1558a23b4a238402878a3f7838101}\index{Medidor.h@{Medidor.h}!SENSIBILIDAD\_SENSOR@{SENSIBILIDAD\_SENSOR}}
+\index{SENSIBILIDAD\_SENSOR@{SENSIBILIDAD\_SENSOR}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{SENSIBILIDAD\_SENSOR}{SENSIBILIDAD\_SENSOR}}
+{\footnotesize\ttfamily \label{_medidor_8h_a8bf1558a23b4a238402878a3f7838101} 
+const float SENSIBILIDAD\+\_\+\+SENSOR = -\/44.\+26f}
+
+
+
+Sensibilidad del sensor electroquímico en n\+A/ppm. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00035}{35}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}\index{Medidor.h@{Medidor.h}!TEMP\_SIMULADA@{TEMP\_SIMULADA}}
+\index{TEMP\_SIMULADA@{TEMP\_SIMULADA}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{TEMP\_SIMULADA}{TEMP\_SIMULADA}}
+{\footnotesize\ttfamily \label{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750} 
+const int TEMP\+\_\+\+SIMULADA\mbox{[}$\,$\mbox{]} = \{320, 345, 366, 389, 335, 368, 353, 360, 400, 320\}}
+
+
+
+Array de temperaturas simuladas (ºC \texorpdfstring{$\ast$}{*} 10). 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00057}{57}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{_medidor_8h_a74a1cea532a8e6925dfdb5fff229b742}\index{Medidor.h@{Medidor.h}!VDD@{VDD}}
+\index{VDD@{VDD}!Medidor.h@{Medidor.h}}
+\doxysubsubsection{\texorpdfstring{VDD}{VDD}}
+{\footnotesize\ttfamily \label{_medidor_8h_a74a1cea532a8e6925dfdb5fff229b742} 
+const float VDD = 3.\+30f}
+
+
+
+Referencia de voltaje del sistema (V). 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00069}{69}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+

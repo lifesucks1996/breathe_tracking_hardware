@@ -1,0 +1,269 @@
+\doxysection{Medidor Class Reference}
+\hypertarget{class_medidor}{}\label{class_medidor}\index{Medidor@{Medidor}}
+
+
+Se encarga de la adquisición y procesamiento de datos ambientales.  
+
+
+
+
+{\ttfamily \#include $<$Medidor.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_medidor_af8dd93b883c64f28bd898c4baaa73dc9}{Medidor}} ()
+\begin{DoxyCompactList}\small\item\em Constructor por defecto. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_medidor_a2f5e07164cb8b796d5a3d3e029ef8c4a}{iniciar\+Medidor}} (int n\+Avg=50)
+\begin{DoxyCompactList}\small\item\em Calibra el medidor obteniendo el voltaje de referencia inicial. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_medidor_a84dc06f0e24c252d14fdf62c01c056bc}{medir\+Bateria}} ()
+\begin{DoxyCompactList}\small\item\em Calcula el porcentaje de carga de la batería real. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_medidor_a203ae9be3a2bf0965bd9316fcd203e19}{medir\+CO2}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene una medida de CO2 de los datos simulados. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_medidor_a742eaebe02e1d1d67df55f7a73878421}{medir\+Temperatura}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene una medida de temperatura de los datos simulados. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_medidor_a5a4a42766626a58f07fbdf6c1e09c117}{get\+Vref\+Base}} () const
+\begin{DoxyCompactList}\small\item\em Retorna el voltaje de referencia base calibrado al inicio. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_medidor_ad8230249aff1d713a13d6d3d1ed94d6d}{leer\+Vgas}} (int n\+Avg=10)
+\begin{DoxyCompactList}\small\item\em Lee el voltaje actual en el pin Vgas del sensor de O3. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_medidor_a9f079334ad20b88dc13d5bdcc9cda512}{medir\+PPMSimulado}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene una medida de Ozono de los datos simulados. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_medidor_aca80a5d79f2e6ac7099a99028053f684}{medir\+PPM}} ()
+\begin{DoxyCompactList}\small\item\em Realiza la medición real de Ozono (O3) en ppm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_medidor_af233476ea641ff48a9d5d7fe38cea06b}{leer\+Volt}} (int pin, int n\+Avg=10)
+\begin{DoxyCompactList}\small\item\em Lee el voltaje de un pin analógico promediando varias muestras. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_medidor_a45358356b40c57c98803c4e259ebf542}{\+\_\+\+Vref\+\_\+base}} = 0.\+0f
+\begin{DoxyCompactList}\small\item\em Valor de calibración inicial de VREF. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Se encarga de la adquisición y procesamiento de datos ambientales. 
+
+
+\begin{DoxyItemize}
+\item Esta clase encapsula tanto las lecturas de los pines analógicos como el procesamiento matemático para convertir voltajes en unidades físicas. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00078}{78}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_medidor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_medidor_af8dd93b883c64f28bd898c4baaa73dc9}\index{Medidor@{Medidor}!Medidor@{Medidor}}
+\index{Medidor@{Medidor}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{Medidor()}{Medidor()}}
+{\footnotesize\ttfamily \label{class_medidor_af8dd93b883c64f28bd898c4baaa73dc9} 
+Medidor\+::\+Medidor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor por defecto. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00102}{102}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_medidor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_medidor_a5a4a42766626a58f07fbdf6c1e09c117}\index{Medidor@{Medidor}!getVrefBase@{getVrefBase}}
+\index{getVrefBase@{getVrefBase}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{getVrefBase()}{getVrefBase()}}
+{\footnotesize\ttfamily \label{class_medidor_a5a4a42766626a58f07fbdf6c1e09c117} 
+float Medidor\+::get\+Vref\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retorna el voltaje de referencia base calibrado al inicio. 
+
+\begin{DoxyReturn}{Returns}
+Voltaje en Voltios. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00163}{163}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{class_medidor_a2f5e07164cb8b796d5a3d3e029ef8c4a}\index{Medidor@{Medidor}!iniciarMedidor@{iniciarMedidor}}
+\index{iniciarMedidor@{iniciarMedidor}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{iniciarMedidor()}{iniciarMedidor()}}
+{\footnotesize\ttfamily \label{class_medidor_a2f5e07164cb8b796d5a3d3e029ef8c4a} 
+void Medidor\+::iniciar\+Medidor (\begin{DoxyParamCaption}\item[{int}]{n\+Avg}{ = {\ttfamily 50}}\end{DoxyParamCaption})}
+
+
+
+Calibra el medidor obteniendo el voltaje de referencia inicial. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+Avg} & Número de muestras para la calibración (por defecto 50). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00109}{109}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{class_medidor_ad8230249aff1d713a13d6d3d1ed94d6d}\index{Medidor@{Medidor}!leerVgas@{leerVgas}}
+\index{leerVgas@{leerVgas}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{leerVgas()}{leerVgas()}}
+{\footnotesize\ttfamily \label{class_medidor_ad8230249aff1d713a13d6d3d1ed94d6d} 
+float Medidor\+::leer\+Vgas (\begin{DoxyParamCaption}\item[{int}]{n\+Avg}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+
+
+Lee el voltaje actual en el pin Vgas del sensor de O3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+Avg} & Número de muestras para el promedio. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Voltaje en Voltios. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00172}{172}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{class_medidor_af233476ea641ff48a9d5d7fe38cea06b}\index{Medidor@{Medidor}!leerVolt@{leerVolt}}
+\index{leerVolt@{leerVolt}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{leerVolt()}{leerVolt()}}
+{\footnotesize\ttfamily \label{class_medidor_af233476ea641ff48a9d5d7fe38cea06b} 
+float Medidor\+::leer\+Volt (\begin{DoxyParamCaption}\item[{int}]{pin}{, }\item[{int}]{n\+Avg}{ = {\ttfamily 10}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Lee el voltaje de un pin analógico promediando varias muestras. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin} & Pin analógico a leer. \\
+\hline
+{\em n\+Avg} & Número de muestras para el promedio. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Voltaje calculado en Voltios. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00089}{89}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{class_medidor_a84dc06f0e24c252d14fdf62c01c056bc}\index{Medidor@{Medidor}!medirBateria@{medirBateria}}
+\index{medirBateria@{medirBateria}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{medirBateria()}{medirBateria()}}
+{\footnotesize\ttfamily \label{class_medidor_a84dc06f0e24c252d14fdf62c01c056bc} 
+int Medidor\+::medir\+Bateria (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Calcula el porcentaje de carga de la batería real. 
+
+Utiliza un divisor de tensión 2\+:1 en el pin A6. \begin{DoxyReturn}{Returns}
+Porcentaje de batería (0-\/100). 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00118}{118}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{class_medidor_a203ae9be3a2bf0965bd9316fcd203e19}\index{Medidor@{Medidor}!medirCO2@{medirCO2}}
+\index{medirCO2@{medirCO2}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{medirCO2()}{medirCO2()}}
+{\footnotesize\ttfamily \label{class_medidor_a203ae9be3a2bf0965bd9316fcd203e19} 
+int Medidor\+::medir\+CO2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene una medida de CO2 de los datos simulados. 
+
+\begin{DoxyReturn}{Returns}
+Valor de CO2 en ppm. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00145}{145}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{class_medidor_aca80a5d79f2e6ac7099a99028053f684}\index{Medidor@{Medidor}!medirPPM@{medirPPM}}
+\index{medirPPM@{medirPPM}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{medirPPM()}{medirPPM()}}
+{\footnotesize\ttfamily \label{class_medidor_aca80a5d79f2e6ac7099a99028053f684} 
+float Medidor\+::medir\+PPM (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Realiza la medición real de Ozono (O3) en ppm. 
+
+Calcula la diferencia entre Vgas y Vref, convierte a corriente y aplica las constantes de sensibilidad y corrección (slope/offset). \begin{DoxyReturn}{Returns}
+Concentración de ozono corregida en ppm. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00192}{192}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{class_medidor_a9f079334ad20b88dc13d5bdcc9cda512}\index{Medidor@{Medidor}!medirPPMSimulado@{medirPPMSimulado}}
+\index{medirPPMSimulado@{medirPPMSimulado}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{medirPPMSimulado()}{medirPPMSimulado()}}
+{\footnotesize\ttfamily \label{class_medidor_a9f079334ad20b88dc13d5bdcc9cda512} 
+float Medidor\+::medir\+PPMSimulado (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene una medida de Ozono de los datos simulados. 
+
+\begin{DoxyReturn}{Returns}
+Valor de ozono en ppm (float). 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00180}{180}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+\Hypertarget{class_medidor_a742eaebe02e1d1d67df55f7a73878421}\index{Medidor@{Medidor}!medirTemperatura@{medirTemperatura}}
+\index{medirTemperatura@{medirTemperatura}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{medirTemperatura()}{medirTemperatura()}}
+{\footnotesize\ttfamily \label{class_medidor_a742eaebe02e1d1d67df55f7a73878421} 
+int Medidor\+::medir\+Temperatura (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene una medida de temperatura de los datos simulados. 
+
+\begin{DoxyReturn}{Returns}
+Temperatura (ºC \texorpdfstring{$\ast$}{*} 10). 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00154}{154}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_medidor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_medidor_a45358356b40c57c98803c4e259ebf542}\index{Medidor@{Medidor}!\_Vref\_base@{\_Vref\_base}}
+\index{\_Vref\_base@{\_Vref\_base}!Medidor@{Medidor}}
+\doxysubsubsection{\texorpdfstring{\_Vref\_base}{\_Vref\_base}}
+{\footnotesize\ttfamily \label{class_medidor_a45358356b40c57c98803c4e259ebf542} 
+float Medidor\+::\+\_\+\+Vref\+\_\+base = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Valor de calibración inicial de VREF. 
+
+
+
+Definition at line \mbox{\hyperlink{_medidor_8h_source_l00081}{81}} of file \mbox{\hyperlink{_medidor_8h_source}{Medidor.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Hola\+Mundo\+IBeacon/\mbox{\hyperlink{_medidor_8h}{Medidor.\+h}}\end{DoxyCompactItemize}

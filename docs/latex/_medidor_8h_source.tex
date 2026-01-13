@@ -1,0 +1,223 @@
+\doxysection{Medidor.\+h}
+\hypertarget{_medidor_8h_source}{}\label{_medidor_8h_source}\index{src/HolaMundoIBeacon/Medidor.h@{src/HolaMundoIBeacon/Medidor.h}}
+\mbox{\hyperlink{_medidor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00001}00001\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ Medidor.h}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ Clase\ para\ la\ gestión\ de\ sensores\ analógicos\ y\ simulados.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ Rocio}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ 11/11/2025}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00006}00006\ \textcolor{comment}{\ *\ @details\ Este\ archivo\ contiene\ la\ lógica\ para\ calcular\ concentraciones\ de\ O3\ }}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00007}00007\ \textcolor{comment}{\ *\ mediante\ un\ sensor\ electroquímico,\ así\ como\ la\ estimación\ del\ nivel\ de\ batería}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00008}00008\ \textcolor{comment}{\ *\ y\ la\ generación\ de\ datos\ simulados\ para\ CO2\ y\ Temperatura.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00009}00009\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00011}00011\ \textcolor{preprocessor}{\#ifndef\ MEDIDOR\_H\_INCLUIDO}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00012}00012\ \textcolor{preprocessor}{\#define\ MEDIDOR\_H\_INCLUIDO}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00017}00017\ \textcolor{comment}{//\ =====================\ CONSTANTES\ DE\ CONFIGURACIÓN\ (O3)\ =====================}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00019}00019\ \textcolor{preprocessor}{\#ifndef\ O3\_PIN\_VGAS}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00020}\mbox{\hyperlink{_medidor_8h_a17e059995c43b2ae3783c684af2d23ce}{00020}}\ \textcolor{preprocessor}{\#define\ O3\_PIN\_VGAS\ A5\ }\textcolor{comment}{///<\ Pin\ para\ el\ voltaje\ de\ gas\ del\ sensor\ de\ ozono.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00021}00021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00022}00022\ \textcolor{preprocessor}{\#ifndef\ O3\_PIN\_VREF}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00023}\mbox{\hyperlink{_medidor_8h_aa83f670a481c5ee394d1f1c2511e6182}{00023}}\ \textcolor{preprocessor}{\#define\ O3\_PIN\_VREF\ A4\ }\textcolor{comment}{///<\ Pin\ para\ el\ voltaje\ de\ referencia\ del\ sensor\ de\ ozono.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00024}00024\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00026}00026\ \textcolor{preprocessor}{\#ifndef\ O3\_VDD}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00027}\mbox{\hyperlink{_medidor_8h_aa67da65e8c9805866a4da81803db36ea}{00027}}\ \textcolor{preprocessor}{\#define\ O3\_VDD\ 1.20f\ \ \ \ \ \ }\textcolor{comment}{///<\ Voltaje\ de\ alimentación\ del\ sensor/ADC\ (V).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00028}00028\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00030}00030\ \textcolor{preprocessor}{\#ifndef\ O3\_ADC\_BITS}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00031}\mbox{\hyperlink{_medidor_8h_a6cd2c69e0d3dfeb8bef0a94a2c73b9d4}{00031}}\ \textcolor{preprocessor}{\#define\ O3\_ADC\_BITS\ 12\ \ \ \ \ \ }\textcolor{comment}{///<\ Resolución\ del\ ADC\ para\ ozono\ (12\ bits).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00032}00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00033}00033\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00034}00034\ \textcolor{comment}{/**\ @brief\ Sensibilidad\ del\ sensor\ electroquímico\ en\ nA/ppm.\ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00035}\mbox{\hyperlink{_medidor_8h_a8bf1558a23b4a238402878a3f7838101}{00035}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_medidor_8h_a8bf1558a23b4a238402878a3f7838101}{SENSIBILIDAD\_SENSOR}}\ =\ -\/44.26f;\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00036}00036\ \textcolor{comment}{/**\ @brief\ Resistencia\ de\ ganancia\ del\ amplificador\ de\ transimpedancia\ (TIA)\ en\ Ohmios.\ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00037}\mbox{\hyperlink{_medidor_8h_a32976ce235f46a567c18b2ae622cdfb7}{00037}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_medidor_8h_a32976ce235f46a567c18b2ae622cdfb7}{GAIN\_TIA}}\ =\ 499.0f;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00039}00039\ \textcolor{comment}{//\ =====================\ CONSTANTES\ DE\ CORRECCIÓN\ =====================}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00041}\mbox{\hyperlink{_medidor_8h_aae1a25c5e24208abdc667629f7a9c3fe}{00041}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_medidor_8h_aae1a25c5e24208abdc667629f7a9c3fe}{CORRECCION\_SLOPE}}\ =\ 1.0f;\ \ \textcolor{comment}{///<\ Factor\ de\ escala\ para\ ajuste\ de\ ganancia\ (m').}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00042}\mbox{\hyperlink{_medidor_8h_a75d0054a3c8b2216f1a26a4eda1f6d48}{00042}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_medidor_8h_a75d0054a3c8b2216f1a26a4eda1f6d48}{CORRECCION\_OFFSET}}\ =\ 0.0f;\ \textcolor{comment}{///<\ Desplazamiento\ para\ ajuste\ de\ línea\ base\ (b').}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00044}00044\ \textcolor{comment}{//\ =====================\ DATOS\ SIMULADOS\ =====================}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00045}00045\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00046}00046\ \textcolor{comment}{///\ @brief\ Array\ de\ valores\ de\ Ozono\ simulados\ (ppm\ *\ 1000).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00047}\mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{00047}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\_SIMULADO}}[]\ =\ \{100,\ 650,\ 45,\ 1200,\ 950,\ 800,\ 300\};\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00048}\mbox{\hyperlink{_medidor_8h_ab94909326f0ceddd8b5bad737ea31381}{00048}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_ab94909326f0ceddd8b5bad737ea31381}{NUM\_O3\_VALORES}}\ =\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\_SIMULADO}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\_SIMULADO}}[0]);}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00049}00049\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00050}00050\ \textcolor{comment}{///\ @brief\ Array\ de\ valores\ de\ CO2\ simulados\ (ppm).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00051}00051\ \ \ \textcolor{comment}{//const\ int\ CO2\_SIMULADO[]\ =\ \{400,\ 550,\ 850,\ 1000,\ 1250,\ 1300,\ 950\};}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00052}\mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{00052}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\_SIMULADO}}[]\ =\ \{1400,\ 1350,\ 1360,\ 1280,\ 1250,\ 1300,\ 1450\};}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00053}\mbox{\hyperlink{_medidor_8h_ae17495ef4475e838aefa92525e10d4df}{00053}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_ae17495ef4475e838aefa92525e10d4df}{NUM\_CO2\_VALORES}}\ =\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\_SIMULADO}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\_SIMULADO}}[0]);}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00054}00054\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00055}00055\ \textcolor{comment}{///\ @brief\ Array\ de\ temperaturas\ simuladas\ (ºC\ *\ 10).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00056}00056\ \ \ \textcolor{comment}{//const\ int\ TEMP\_SIMULADA[]\ =\ \{220,\ 245,\ 266,\ 289,\ 235,\ 68,\ 353,\ 360,\ 400,\ 320\};}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00057}\mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{00057}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\_SIMULADA}}[]\ =\ \{320,\ 345,\ 366,\ 389,\ 335,\ 368,\ 353,\ 360,\ 400,\ 320\};}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00058}\mbox{\hyperlink{_medidor_8h_afdca68679ee61c61d537000dd5e5a433}{00058}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_afdca68679ee61c61d537000dd5e5a433}{NUM\_TEMP\_VALORES}}\ =\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\_SIMULADA}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\_SIMULADA}}[0]);}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00059}00059\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00060}00060\ \textcolor{comment}{///\ @brief\ Array\ de\ porcentajes\ de\ batería\ simulados.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00061}00061\ \ \ \textcolor{comment}{//const\ int\ BAT\_SIMULADA[]\ =\ \{98,\ 87,\ 80,\ 75,\ 50,\ 30,\ 15,\ 77,\ 63\};\ }}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00062}\mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{00062}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{BAT\_SIMULADA}}[]\ =\ \{15,\ 14,\ 12,\ 10,\ 8,\ 7,\ 3,\ 1\};\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00063}\mbox{\hyperlink{_medidor_8h_ae14bd1b14bea466b8db312e9d7ab905b}{00063}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_ae14bd1b14bea466b8db312e9d7ab905b}{NUM\_BAT\_VALORES}}\ =\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{BAT\_SIMULADA}})\ /\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{_medidor_8h_a48f6b4a2dc24f7493144401db1755ea4}{BAT\_SIMULADA}}[0]);}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00065}00065\ \textcolor{comment}{//\ =====================\ CONSTANTES\ BATERÍA\ REAL\ =====================}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00067}\mbox{\hyperlink{_medidor_8h_a8557af94cdae9d232b82a9b09f9ba32b}{00067}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_medidor_8h_a8557af94cdae9d232b82a9b09f9ba32b}{BATT\_MAX\_VOLTS}}\ =\ 4.20f;\ \textcolor{comment}{///<\ Voltaje\ LiPo\ al\ 100\%.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00068}\mbox{\hyperlink{_medidor_8h_a72d3c9c80013139b3f07092b88c554d0}{00068}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_medidor_8h_a72d3c9c80013139b3f07092b88c554d0}{BATT\_MIN\_VOLTS}}\ =\ 3.30f;\ \textcolor{comment}{///<\ Voltaje\ LiPo\ al\ 0\%.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00069}\mbox{\hyperlink{_medidor_8h_a74a1cea532a8e6925dfdb5fff229b742}{00069}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_medidor_8h_a74a1cea532a8e6925dfdb5fff229b742}{VDD}}\ =\ 3.30f;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{///<\ Referencia\ de\ voltaje\ del\ sistema\ (V).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00070}\mbox{\hyperlink{_medidor_8h_a2ae51919a43a4b992dabc861ce88dfd5}{00070}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_medidor_8h_a2ae51919a43a4b992dabc861ce88dfd5}{ADC\_BITS}}\ =\ 10;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{///<\ Resolución\ ADC\ para\ batería.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00071}00071\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00072}00072\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00073}00073\ \textcolor{comment}{\ *\ @class\ Medidor}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00074}00074\ \textcolor{comment}{\ *\ @brief\ Se\ encarga\ de\ la\ adquisición\ y\ procesamiento\ de\ datos\ ambientales.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00075}00075\ \textcolor{comment}{\ *\ *\ Esta\ clase\ encapsula\ tanto\ las\ lecturas\ de\ los\ pines\ analógicos\ como}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00076}00076\ \textcolor{comment}{\ *\ el\ procesamiento\ matemático\ para\ convertir\ voltajes\ en\ unidades\ físicas.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00077}00077\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00078}\mbox{\hyperlink{class_medidor}{00078}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_medidor_af8dd93b883c64f28bd898c4baaa73dc9}{Medidor}}\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00080}00080\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00081}\mbox{\hyperlink{class_medidor_a45358356b40c57c98803c4e259ebf542}{00081}}\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_medidor_a45358356b40c57c98803c4e259ebf542}{\_Vref\_base}}\ =\ 0.0f;\ \textcolor{comment}{///<\ Valor\ de\ calibración\ inicial\ de\ VREF.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00082}00082\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00083}00083\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ *\ @brief\ Lee\ el\ voltaje\ de\ un\ pin\ analógico\ promediando\ varias\ muestras.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00085}00085\ \textcolor{comment}{\ \ \ *\ @param\ pin\ Pin\ analógico\ a\ leer.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00086}00086\ \textcolor{comment}{\ \ \ *\ @param\ nAvg\ Número\ de\ muestras\ para\ el\ promedio.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00087}00087\ \textcolor{comment}{\ \ \ *\ @return\ Voltaje\ calculado\ en\ Voltios.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00088}00088\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00089}\mbox{\hyperlink{class_medidor_af233476ea641ff48a9d5d7fe38cea06b}{00089}}\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_medidor_af233476ea641ff48a9d5d7fe38cea06b}{leerVolt}}(\textcolor{keywordtype}{int}\ pin,\ \textcolor{keywordtype}{int}\ nAvg\ =\ 10)\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00090}00090\ \ \ \ \ \textcolor{keywordtype}{long}\ acc\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i=0;\ i<nAvg;\ ++i)\ \{\ acc\ +=\ analogRead(pin);\ delay(2);\ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00092}00092\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ raw\ =\ (float)acc\ /\ nAvg;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ fullScale\ =\ (float)((1\ <<\ \mbox{\hyperlink{_medidor_8h_a6cd2c69e0d3dfeb8bef0a94a2c73b9d4}{O3\_ADC\_BITS}})\ -\/\ 1);\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{return}\ (raw\ *\ \mbox{\hyperlink{_medidor_8h_aa67da65e8c9805866a4da81803db36ea}{O3\_VDD}})\ /\ fullScale;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00095}00095\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00097}00097\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00098}00098\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00099}00099\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ *\ @brief\ Constructor\ por\ defecto.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00102}\mbox{\hyperlink{class_medidor_af8dd93b883c64f28bd898c4baaa73dc9}{00102}}\ \ \ \mbox{\hyperlink{class_medidor_af8dd93b883c64f28bd898c4baaa73dc9}{Medidor}}(\ \ )\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00103}00103\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00104}00104\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00105}00105\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ *\ @brief\ Calibra\ el\ medidor\ obteniendo\ el\ voltaje\ de\ referencia\ inicial.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ *\ @param\ nAvg\ Número\ de\ muestras\ para\ la\ calibración\ (por\ defecto\ 50).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00108}00108\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00109}\mbox{\hyperlink{class_medidor_a2f5e07164cb8b796d5a3d3e029ef8c4a}{00109}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_medidor_a2f5e07164cb8b796d5a3d3e029ef8c4a}{iniciarMedidor}}(\textcolor{keywordtype}{int}\ nAvg\ =\ 50)\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00110}00110\ \ \ \ \ \ \ \ \mbox{\hyperlink{class_medidor_a45358356b40c57c98803c4e259ebf542}{\_Vref\_base}}\ =\ \mbox{\hyperlink{class_medidor_af233476ea641ff48a9d5d7fe38cea06b}{leerVolt}}(\mbox{\hyperlink{_medidor_8h_aa83f670a481c5ee394d1f1c2511e6182}{O3\_PIN\_VREF}},\ nAvg);}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00111}00111\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00112}00112\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00113}00113\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ *\ @brief\ Calcula\ el\ porcentaje\ de\ carga\ de\ la\ batería\ real.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ *\ @details\ Utiliza\ un\ divisor\ de\ tensión\ 2:1\ en\ el\ pin\ A6.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ *\ @return\ Porcentaje\ de\ batería\ (0-\/100).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00118}\mbox{\hyperlink{class_medidor_a84dc06f0e24c252d14fdf62c01c056bc}{00118}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_medidor_a84dc06f0e24c252d14fdf62c01c056bc}{medirBateria}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00119}00119\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nAvg\ =\ 10;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00120}00120\ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ rawAcc\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00121}00121\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ nAvg;\ ++i)\ \{\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ rawAcc\ +=\ analogRead(PIN\_A6);\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ delay(1);\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00124}00124\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00125}00125\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ rawAvg\ =\ (float)rawAcc\ /\ nAvg;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00126}00126\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ fullScale\ =\ (float)((1\ <<\ \mbox{\hyperlink{_medidor_8h_a2ae51919a43a4b992dabc861ce88dfd5}{ADC\_BITS}})\ -\/\ 1);\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00127}00127\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ measuredVolts\ =\ (rawAvg\ *\ \mbox{\hyperlink{_medidor_8h_a74a1cea532a8e6925dfdb5fff229b742}{VDD}})\ /\ fullScale;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00128}00128\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00129}00129\ \ \ \ \ \ \ \textcolor{comment}{//\ Multiplicar\ por\ 2\ por\ el\ divisor\ de\ voltaje\ del\ hardware}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00130}00130\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ battVolts\ =\ measuredVolts\ *\ 2.0f;\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00131}00131\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00132}00132\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ battRange\ =\ \mbox{\hyperlink{_medidor_8h_a8557af94cdae9d232b82a9b09f9ba32b}{BATT\_MAX\_VOLTS}}\ -\/\ \mbox{\hyperlink{_medidor_8h_a72d3c9c80013139b3f07092b88c554d0}{BATT\_MIN\_VOLTS}};}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00133}00133\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ percent\ =\ ((battVolts\ -\/\ \mbox{\hyperlink{_medidor_8h_a72d3c9c80013139b3f07092b88c554d0}{BATT\_MIN\_VOLTS}})\ /\ battRange)\ *\ 100.0f;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00135}00135\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (percent\ >\ 100.0f)\ percent\ =\ 100.0f;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00136}00136\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (percent\ <\ 0.0f)\ percent\ =\ 0.0f;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00138}00138\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})percent;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00139}00139\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00140}00140\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00141}00141\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00142}00142\ \textcolor{comment}{\ \ \ *\ @brief\ Obtiene\ una\ medida\ de\ CO2\ de\ los\ datos\ simulados.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00143}00143\ \textcolor{comment}{\ \ \ *\ @return\ Valor\ de\ CO2\ en\ ppm.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00144}00144\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00145}\mbox{\hyperlink{class_medidor_a203ae9be3a2bf0965bd9316fcd203e19}{00145}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_medidor_a203ae9be3a2bf0965bd9316fcd203e19}{medirCO2}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00146}00146\ \ \ \ \ \textcolor{keywordtype}{int}\ indiceAleatorio\ =\ random(0,\ \mbox{\hyperlink{_medidor_8h_ae17495ef4475e838aefa92525e10d4df}{NUM\_CO2\_VALORES}});\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00147}00147\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_medidor_8h_a71ec3fd0c221a9f878d0d8b641b886f7}{CO2\_SIMULADO}}[indiceAleatorio];}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00148}00148\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00149}00149\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00150}00150\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00151}00151\ \textcolor{comment}{\ \ \ *\ @brief\ Obtiene\ una\ medida\ de\ temperatura\ de\ los\ datos\ simulados.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00152}00152\ \textcolor{comment}{\ \ \ *\ @return\ Temperatura\ (ºC\ *\ 10).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00153}00153\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00154}\mbox{\hyperlink{class_medidor_a742eaebe02e1d1d67df55f7a73878421}{00154}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_medidor_a742eaebe02e1d1d67df55f7a73878421}{medirTemperatura}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00155}00155\ \ \ \ \ \textcolor{keywordtype}{int}\ indiceAleatorio\ =\ random(0,\ \mbox{\hyperlink{_medidor_8h_afdca68679ee61c61d537000dd5e5a433}{NUM\_TEMP\_VALORES}});}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00156}00156\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_medidor_8h_a8e9cfaeaf5bf112f9897bb1f5e5c0750}{TEMP\_SIMULADA}}[indiceAleatorio];}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00157}00157\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00158}00158\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00159}00159\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00160}00160\ \textcolor{comment}{\ \ \ *\ @brief\ Retorna\ el\ voltaje\ de\ referencia\ base\ calibrado\ al\ inicio.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00161}00161\ \textcolor{comment}{\ \ \ *\ @return\ Voltaje\ en\ Voltios.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00162}00162\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00163}\mbox{\hyperlink{class_medidor_a5a4a42766626a58f07fbdf6c1e09c117}{00163}}\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_medidor_a5a4a42766626a58f07fbdf6c1e09c117}{getVrefBase}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_medidor_a45358356b40c57c98803c4e259ebf542}{\_Vref\_base}};\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00165}00165\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00166}00166\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00167}00167\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00168}00168\ \textcolor{comment}{\ \ \ *\ @brief\ Lee\ el\ voltaje\ actual\ en\ el\ pin\ Vgas\ del\ sensor\ de\ O3.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00169}00169\ \textcolor{comment}{\ \ \ *\ @param\ nAvg\ Número\ de\ muestras\ para\ el\ promedio.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00170}00170\ \textcolor{comment}{\ \ \ *\ @return\ Voltaje\ en\ Voltios.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00171}00171\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00172}\mbox{\hyperlink{class_medidor_ad8230249aff1d713a13d6d3d1ed94d6d}{00172}}\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_medidor_ad8230249aff1d713a13d6d3d1ed94d6d}{leerVgas}}(\textcolor{keywordtype}{int}\ nAvg\ =\ 10)\ \{\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_medidor_af233476ea641ff48a9d5d7fe38cea06b}{leerVolt}}(\mbox{\hyperlink{_medidor_8h_a17e059995c43b2ae3783c684af2d23ce}{O3\_PIN\_VGAS}},\ nAvg);\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00174}00174\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00175}00175\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00176}00176\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00177}00177\ \textcolor{comment}{\ \ \ *\ @brief\ Obtiene\ una\ medida\ de\ Ozono\ de\ los\ datos\ simulados.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00178}00178\ \textcolor{comment}{\ \ \ *\ @return\ Valor\ de\ ozono\ en\ ppm\ (float).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00179}00179\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00180}\mbox{\hyperlink{class_medidor_a9f079334ad20b88dc13d5bdcc9cda512}{00180}}\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_medidor_a9f079334ad20b88dc13d5bdcc9cda512}{medirPPMSimulado}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00181}00181\ \ \ \ \ \textcolor{keywordtype}{int}\ indiceAleatorio\ =\ random(0,\ \mbox{\hyperlink{_medidor_8h_ab94909326f0ceddd8b5bad737ea31381}{NUM\_O3\_VALORES}});}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00182}00182\ \ \ \ \ \textcolor{keywordtype}{float}\ valorSimuladoRaw\ =\ (float)\mbox{\hyperlink{_medidor_8h_a959848bb6d89238644a72659cc11f6de}{O3\_SIMULADO}}[indiceAleatorio];\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00183}00183\ \ \ \ \ \textcolor{keywordflow}{return}\ valorSimuladoRaw\ /\ 1000.0f;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00184}00184\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00185}00185\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00186}00186\ \textcolor{comment}{\ \ /**}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00187}00187\ \textcolor{comment}{\ \ \ *\ @brief\ Realiza\ la\ medición\ real\ de\ Ozono\ (O3)\ en\ ppm.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00188}00188\ \textcolor{comment}{\ \ \ *\ @details\ Calcula\ la\ diferencia\ entre\ Vgas\ y\ Vref,\ convierte\ a\ corriente\ y\ }}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00189}00189\ \textcolor{comment}{\ \ \ *\ aplica\ las\ constantes\ de\ sensibilidad\ y\ corrección\ (slope/offset).}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00190}00190\ \textcolor{comment}{\ \ \ *\ @return\ Concentración\ de\ ozono\ corregida\ en\ ppm.}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00191}00191\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00192}\mbox{\hyperlink{class_medidor_aca80a5d79f2e6ac7099a99028053f684}{00192}}\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_medidor_aca80a5d79f2e6ac7099a99028053f684}{medirPPM}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00193}00193\ \ \ \ \ \textcolor{keywordtype}{float}\ Vg\ =\ \mbox{\hyperlink{class_medidor_af233476ea641ff48a9d5d7fe38cea06b}{leerVolt}}(\mbox{\hyperlink{_medidor_8h_a17e059995c43b2ae3783c684af2d23ce}{O3\_PIN\_VGAS}},\ 10);}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00194}00194\ \ \ \ \ \textcolor{keywordtype}{float}\ deltaV\ =\ Vg\ -\/\ \mbox{\hyperlink{class_medidor_a45358356b40c57c98803c4e259ebf542}{\_Vref\_base}};}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00195}00195\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00196}00196\ \ \ \ \ \textcolor{keywordtype}{float}\ denominador\ =\ \mbox{\hyperlink{_medidor_8h_a32976ce235f46a567c18b2ae622cdfb7}{GAIN\_TIA}}\ *\ \mbox{\hyperlink{_medidor_8h_a8bf1558a23b4a238402878a3f7838101}{SENSIBILIDAD\_SENSOR}}\ *\ 1e-\/6f;\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00197}00197\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00198}00198\ \ \ \ \ \textcolor{keywordtype}{float}\ ppm\_bruto\ =\ 0.0f;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{if}\ (denominador\ !=\ 0.0f)\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00200}00200\ \ \ \ \ \ \ ppm\_bruto\ =\ deltaV\ /\ denominador;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00201}00201\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00203}00203\ \ \ \ \ ppm\_bruto\ =\ fabsf(ppm\_bruto);\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00204}00204\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00205}00205\ \ \ \ \ \textcolor{comment}{//\ Ajuste\ lineal\ final}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00206}00206\ \ \ \ \ \textcolor{keywordtype}{float}\ ppm\_corregido\ =\ (ppm\_bruto\ *\ \mbox{\hyperlink{_medidor_8h_aae1a25c5e24208abdc667629f7a9c3fe}{CORRECCION\_SLOPE}})\ +\ \mbox{\hyperlink{_medidor_8h_a75d0054a3c8b2216f1a26a4eda1f6d48}{CORRECCION\_OFFSET}};}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{if}\ (ppm\_corregido\ <\ 0.0f)\ \{}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00209}00209\ \ \ \ \ \ \ ppm\_corregido\ =\ 0.0f;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00210}00210\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00212}00212\ \ \ \ \ \textcolor{keywordflow}{return}\ ppm\_corregido;}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00213}00213\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00214}00214\ \ \ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00215}00215\ \};\ \textcolor{comment}{//\ class}}
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_medidor_8h_source_l00217}00217\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
