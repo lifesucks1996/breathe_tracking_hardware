@@ -1,9 +1,13 @@
 // --------------------------------------------------------------
-//
-// Rocio
-// 11/11/2025
-// Modificado 26/11/25
-//
+/**
+* @file HolaMundoIBeacon.ino
+* @brief Sistema de monitorización ambiental (O3, CO2, Temperatura) con BLE.
+* @author Rocio
+* @date 11/11/2025
+* @details Modificado el 26/11/25. Este programa gestiona la lectura de sensores de gas y batería, 
+* y emite los datos recolectados mediante un beacon Bluetooth Low Energy. Modificado el 09/01/26,
+* comentarios para Doxygen.
+*/
 // --------------------------------------------------------------
 
 #include <bluefruit.h>
@@ -20,11 +24,18 @@
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
+
+/**
+* @namespace Globales
+* @brief Objetos globales de control de periféricos y sensores.
+*/
+
 namespace Globales {
-  
+  //Instancia para el control del LED
   LED elLED (7);
 
-  PuertoSerie elPuerto ( /* velocidad = */ 115200 ); // 115200 o 9600 o ...
+  //Intrancia para la comunicacion serie
+  PuertoSerie elPuerto (115200); 
 
 };
 
@@ -38,15 +49,20 @@ namespace Globales {
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 namespace Globales {
-
+  //Instancia del publicador para gestionar los anuncios BLE
   Publicador elPublicador;
 
+  //Instancia del medidor para obtener los datos de los sensores del nodo
   Medidor elMedidor;
 
-}; // namespace
+};
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
+/**
+* @brief Configura los pines analógicos de la placa.
+* Inicializa los pines para la lectura de O3 (VGAS, VREF) y la batería.
+*/
 void inicializarPlaquita () {
 
   pinMode(O3_PIN_VGAS, INPUT); // A5 default
@@ -58,6 +74,10 @@ void inicializarPlaquita () {
 // --------------------------------------------------------------
 // setup()
 // --------------------------------------------------------------
+/**
+* @brief Configuración inicial del sistema.
+* Inicializa el hardware, calibra el medidor y arranca el publicador BLE.
+*/
 void setup() {
 
   //----------------------------------------------------------------- 
@@ -67,17 +87,16 @@ void setup() {
   //-----------------------------------------------------------------
   //-----------------------------------------------------------------
   
-  randomSeed(analogRead(0)); //Asegura que se use orden random en las medidas fake
+  //Asegura que se use orden random en las medidas fake
+  randomSeed(analogRead(0)); 
 
-  // Suspend Loop() to save power
-  // suspendLoop();
-
+  // Inicia la emisión BLE
   Globales::elPublicador.encenderEmisora();
 
   //-----------------------------------------------------------------
 
+  // Inicializa sensor y realiza calibración inicial
   Globales::elMedidor.iniciarMedidor();
-
   esperar( 1000 );
 
   float vref_calibrado = Globales::elMedidor.getVrefBase();  
@@ -92,6 +111,10 @@ void setup() {
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
+/**
+* @brief Ejecuta una secuencia visual de parpadeo con el LED.
+* Utilizada para indicar estados del programa mediante pausas y brillos.
+*/
 inline void lucecitas() {
   using namespace Globales;
 
@@ -108,12 +131,21 @@ inline void lucecitas() {
 // --------------------------------------------------------------
 // loop ()
 // --------------------------------------------------------------
+/**
+* @namespace Loop
+* @brief Variables persistentes para el ciclo de ejecución principal.
+*/
 namespace Loop {
   uint8_t cont = 0;
 };
 
 // ..............................................................
 // ..............................................................
+/**
+* @brief Ciclo principal del programa.
+* Realiza la lectura de sensores, formatea los datos en un payload de 9 bytes
+* y los emite por Bluetooth durante un periodo determinado.
+*/
 void loop () {
 
   using namespace Loop;
